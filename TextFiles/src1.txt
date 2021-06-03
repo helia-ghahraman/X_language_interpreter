@@ -1,9 +1,15 @@
 int x = 10
 int y = 30
+
+
+
+
+
 int z
 int w = 50
 int sum
-
+float r = 5.2
+float y = 5
 %%
 sum = x + y
 sum = sum + z
