@@ -18,8 +18,10 @@ public class Program {
         } else if (f.isFile()) {
             readFile(f);
         }
+
         System.out.println(intVariables);
         System.out.println(floatVariables);
+//        System.out.println(intVariables.get("y"));
     }
 
     //Other methods ... *******************************************************************
@@ -33,7 +35,7 @@ public class Program {
                 continue;
             }
             String[] tokens = line.split(" ");
-            System.out.println(Arrays.toString(tokens));
+//            System.out.println(Arrays.toString(tokens));
             if (tokens[0].equals("%%")) {
                 faz1 = false; //jump to faz2
             } else if (tokens[0].equals("int")) {
@@ -51,8 +53,8 @@ public class Program {
             }
 
             String[] tokens = line.split(" ");
-            System.out.println(Arrays.toString(tokens));
-            if (tokens.length == 4) {
+//            System.out.println(Arrays.toString(tokens));
+            if (tokens.length == 5) {
                 initAttributionProcess(tokens);
             }
             if (tokens.length == 2) {
@@ -61,27 +63,84 @@ public class Program {
 
 
         }
-
-
+        sc.close();
     }
 
     private static void initOthersProcess(String[] tokens) {
         if (tokens[0].equals("for")) {
+            //Todo write something here for Loop
 
         } else if (tokens[0].equals("print")) {
-
+            printProcess(tokens);
         }
     }
 
+    private static void printProcess(String[] tokens) {
+        if (intVariables.containsKey(tokens[1]))
+            System.out.println(intVariables.get(tokens[1]));
+
+        else if (floatVariables.containsKey(tokens[1]))
+            System.out.println(floatVariables.get(tokens[1]));
+        else
+            System.out.println(tokens[1]);
+    }
+
     private static void initAttributionProcess(String[] tokens) {
+        int intVar1 = 0, intVar2 = 0, intVar3 = 0;
+        float floatVar1 = 0, floatVar2 = 0, floatVar3 = 0;
+
+        //Todo change something here
+
+        if (intVariables.containsKey(tokens[0])) {
+            intVar1 = intVariables.get(tokens[0]);
+        } else {
+            floatVar1 = floatVariables.get(tokens[0]);
+        }
+        if (intVariables.containsKey(tokens[2]))
+            intVar2 = intVariables.get(tokens[2]);
+        else
+            floatVar2 = floatVariables.get(tokens[2]);
+
+        if (intVariables.containsKey(tokens[4]))
+            intVar3 = intVariables.get(tokens[4]);
+        else
+            floatVar3 = floatVariables.get(tokens[4]);
+
+
         if (tokens[3].equals("+")) {
+            intVar1 = (int) (intVar2 + intVar3 + floatVar2 + floatVar3);
+            floatVar1 = intVar2 + intVar3 + floatVar2 + floatVar3;
         } else if (tokens[3].equals("-")) {
+            intVar1 = (int) (intVar2 - intVar3 + floatVar2 - floatVar3);
+            floatVar1 = intVar2 - intVar3 + floatVar2 - floatVar3;
 
         } else if (tokens[3].equals("*")) {
+            intVar1 = (int) ((intVar2 * intVar3) + (floatVar2 * floatVar3) + (intVar2 * floatVar3) + (floatVar2 * intVar3));
+            floatVar1 = (intVar2 * intVar3) + (floatVar2 * floatVar3) + (intVar2 * floatVar3) + (floatVar2 * intVar3);
 
         } else if (tokens[3].equals("/")) {
-
+            if ((intVar2 != 0) && (intVar3 != 0)) {
+                intVar1 = intVar2 / intVar3;
+                floatVar1 = intVar1 / intVar2;
+            } else if ((floatVar2 != 0) && (floatVar3 != 0)) {
+                intVar1 = (int) (floatVar2 / floatVar3);
+                floatVar1 = floatVar2 / floatVar3;
+            } else if ((intVar2 != 0) && (floatVar3 != 0)) {
+                intVar1 = (int) (intVar2 / floatVar3);
+                floatVar1 = intVar2 / floatVar3;
+            } else if ((floatVar2 != 0) && (intVar3 != 0)) {
+                intVar1 = (int) (floatVar2 / intVar3);
+                floatVar1 = floatVar2 / intVar3;
+            }
         }
+        if (intVariables.containsKey(tokens[0])) {
+            intVariables.remove(tokens[0]);
+            intVariables.put(tokens[0], intVar1);
+        } else if (floatVariables.containsKey(tokens[0])) {
+            floatVariables.remove(tokens[0]);
+            floatVariables.put(tokens[0], floatVar1);
+        }
+
     }
 
     private static void initFloatVariable(String[] tokens) {
@@ -100,4 +159,3 @@ public class Program {
         }
     }
 }
-
