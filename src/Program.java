@@ -11,7 +11,8 @@ public class Program {
     static Integer endLoopLineNumber = 0;
     //Main Method ... ********************************************************************
     public static void main(String[] args) throws FileNotFoundException {
-        File f = new File("TextFiles//src4.txt");
+
+        File f = new File("TextFiles//src5.txt");
         if (f.isDirectory()) {
             throw new IllegalArgumentException("there is a directory...");
         } else if (f.isFile()) {
@@ -21,6 +22,10 @@ public class Program {
 //        System.out.println(intVariables);
 //        System.out.println(floatVariables);
 //        System.out.println("***" + intVariables.get("sum"));
+
+//        int & = 0;
+//        System.out.println("****");
+//        System.out.println(&);
     }
 
     //Other methods ... *******************************************************************
