@@ -143,33 +143,35 @@ public class Program {
             floatVar3 = Float.parseFloat(tokens[4]);
         }
 
+        switch(tokens[3]){
+            case"+":
+                intVar1 = (int) (intVar2 + intVar3 + floatVar2 + floatVar3);
+                floatVar1 = intVar2 + intVar3 + floatVar2 + floatVar3;
+                break;
+            case "-":
+                intVar1 = (int) (intVar2 - intVar3 + floatVar2 - floatVar3);
+                floatVar1 = intVar2 - intVar3 + floatVar2 - floatVar3;
+                break;
+            case "*":
+                intVar1 = (int) ((intVar2 * intVar3) + (floatVar2 * floatVar3) + (intVar2 * floatVar3) + (floatVar2 * intVar3));
+                floatVar1 = (intVar2 * intVar3) + (floatVar2 * floatVar3) + (intVar2 * floatVar3) + (floatVar2 * intVar3);
+                break;
+            case "/":
 
-        if (tokens[3].equals("+")) {
-            intVar1 = (int) (intVar2 + intVar3 + floatVar2 + floatVar3);
-            floatVar1 = intVar2 + intVar3 + floatVar2 + floatVar3;
-
-        } else if (tokens[3].equals("-")) {
-            intVar1 = (int) (intVar2 - intVar3 + floatVar2 - floatVar3);
-            floatVar1 = intVar2 - intVar3 + floatVar2 - floatVar3;
-
-        } else if (tokens[3].equals("*")) {
-            intVar1 = (int) ((intVar2 * intVar3) + (floatVar2 * floatVar3) + (intVar2 * floatVar3) + (floatVar2 * intVar3));
-            floatVar1 = (intVar2 * intVar3) + (floatVar2 * floatVar3) + (intVar2 * floatVar3) + (floatVar2 * intVar3);
-
-        } else if (tokens[3].equals("/")) {
-            if ((intVar2 != 0) && (intVar3 != 0)) {
-                intVar1 = intVar2 / intVar3;
-                floatVar1 = intVar1 / intVar2;
-            } else if ((floatVar2 != 0) && (floatVar3 != 0)) {
-                intVar1 = (int) (floatVar2 / floatVar3);
-                floatVar1 = floatVar2 / floatVar3;
-            } else if ((intVar2 != 0) && (floatVar3 != 0)) {
-                intVar1 = (int) (intVar2 / floatVar3);
-                floatVar1 = intVar2 / floatVar3;
-            } else if ((floatVar2 != 0) && (intVar3 != 0)) {
-                intVar1 = (int) (floatVar2 / intVar3);
-                floatVar1 = floatVar2 / intVar3;
-            }
+                if ((intVar2 != 0) && (intVar3 != 0)) {
+                    intVar1 = intVar2 / intVar3;
+                    floatVar1 = intVar1 / intVar2;
+                } else if ((floatVar2 != 0) && (floatVar3 != 0)) {
+                    intVar1 = (int) (floatVar2 / floatVar3);
+                    floatVar1 = floatVar2 / floatVar3;
+                } else if ((intVar2 != 0) && (floatVar3 != 0)) {
+                    intVar1 = (int) (intVar2 / floatVar3);
+                    floatVar1 = intVar2 / floatVar3;
+                } else if ((floatVar2 != 0) && (intVar3 != 0)) {
+                    intVar1 = (int) (floatVar2 / intVar3);
+                    floatVar1 = floatVar2 / intVar3;
+                }
+                break;
         }
 
         if (intVariables.containsKey(tokens[0])) {
