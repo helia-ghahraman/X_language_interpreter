@@ -4,7 +4,7 @@ int z = 50
 float u = 80.502
 int t = 40
 float w = -0.5
-float sum
+int sum
 %%
 sum = x / y
 print sum

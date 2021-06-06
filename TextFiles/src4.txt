@@ -1,0 +1,36 @@
+int n = 1
+int sum
+%%
+
+
+sum = n + n
+print sum
+print *******
+
+sum = -5 + n
+sum = sum + 1
+print sum
+print *******
+
+sum = 0 + 1
+print sum
+print *******
+
+sum = -5 + n
+print sum
+print *******
+
+sum = 0 + 1
+print sum
+sum = sum + 1
+print sum
+print *******
+
+sum = 100
+print sum
+print *******
+
+
+
+
+
