@@ -1,6 +1,6 @@
 package Interpreter2;
 
-public class Logic extends Choose {
+public class Logic extends Statement {
     public static void initAttributionProcess(String[] tokens) {
 
         int intVar1 = 0, intVar2 = 0, intVar3 = 0;
@@ -92,5 +92,10 @@ public class Logic extends Choose {
         } else {
             Variable variable2 = new Variable(tokens[0], tokens[1]);
         }
+    }
+
+    @Override
+    public void execute(String[] tokens) {
+
     }
 }

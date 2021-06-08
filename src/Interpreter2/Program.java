@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-public class Program extends Choose {
+public class Program {
     static Integer lineNumber = 0;
     static Integer endLoopLineNumber = 0;
 
@@ -28,44 +28,54 @@ public class Program extends Choose {
     }
 
     //Other methods ... *******************************************************************
-    private static void readFile(File f) throws FileNotFoundException {
+    public static void readFile(File f)  {
         Boolean faz1 = true; //true -> faz1, false -> faz2
-        Scanner sc = new Scanner(f);
+        try {
+            Scanner sc = new Scanner(f);
 
-        while (faz1) {
-            String line = sc.nextLine();
-            line.trim();
-            if (line.isEmpty()) {
-                continue;
-            }
-            String[] tokens = line.split(" ");
+            while (faz1) {
+                String line = sc.nextLine();
+                line.trim();
+                if (line.isEmpty()) continue;
+
+                String[] tokens = line.split(" ");
 //            System.out.println(Arrays.toString(tokens));
-            if (tokens[0].equals("%%")) {
-                faz1 = false; //jump to faz2
-            } else if (tokens[0].equals("int")) {
-                Logic.initIntVariable(tokens);
-            } else if (tokens[0].equals("float")) {
-                Logic.initFloatVariable(tokens);
-            } else {
-                throw new IllegalArgumentException("Illegal Data Type");
+                switch (tokens[0]) {
+                    case "%%":
+                        faz1 = false; //jump to faz2
+                        break;
+                    case "int":
+                        Logic.initIntVariable(tokens);
+                        break;
+                    case "float":
+                        Logic.initFloatVariable(tokens);
+                        break;
+                    default:
+                        throw new IllegalArgumentException("Illegal Data Type");
+                }
             }
-        }
-        while (sc.hasNextLine()) {
-            String line = sc.nextLine();
-            if (line.isEmpty()) {
-                continue;
-            }
-            String[] tokens = line.split(" ");
+            while (sc.hasNextLine()) {
+                String line = sc.nextLine();
+                if (line.isEmpty()) continue;
+                String[] tokens = line.split(" ");
 //            System.out.println(Arrays.toString(tokens));
-            if (tokens.length == 5) {
-                Logic.initAttributionProcess(tokens);
-            } else if (tokens.length == 3) {
-                Process.defineProcess(tokens);
-            } else if (tokens.length == 2) {
-                Logic.initOthersProcess(tokens);
+                switch (tokens.length) {
+                    case 5:
+                        Logic.initAttributionProcess(tokens);
+                        break;
+                    case 3:
+                        Process.defineProcess(tokens);
+                        break;
+                    case 2:
+                        Logic.initOthersProcess(tokens);
+                        break;
+                }
             }
+            sc.close();
         }
-        sc.close();
+        catch (FileNotFoundException e){
+            e.printStackTrace();
+        }
     }
 
 }

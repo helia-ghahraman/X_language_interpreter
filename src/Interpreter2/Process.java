@@ -1,6 +1,6 @@
 package Interpreter2;
 
-public class Process extends Choose {
+public class Process extends Statement {
     public static void defineProcess(String[] tokens) {
         int intVar1 = 0, intVar2 = 0;
         float floatVar1 = 0, floatVar2 = 0;
@@ -29,4 +29,8 @@ public class Process extends Choose {
         }
     }
 
+    @Override
+    public void execute(String[]tokens) {
+
+    }
 }

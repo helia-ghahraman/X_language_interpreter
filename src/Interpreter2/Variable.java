@@ -2,7 +2,7 @@ package Interpreter2;
 
 import java.util.HashMap;
 
-public class Variable extends Choose {
+public class Variable {
     static HashMap<String, Integer> intVariables = new HashMap<>();
     static HashMap<String, Float> floatVariables = new HashMap<>();
 
