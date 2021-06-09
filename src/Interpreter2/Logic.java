@@ -1,6 +1,13 @@
 package Interpreter2;
 
 public class Logic extends Statement {
+
+    public Logic(String[] tokens) {
+        execute(tokens);
+    }
+
+    //Methods *****************************************
+
     public static void initAttributionProcess(String[] tokens) {
 
         int intVar1 = 0, intVar2 = 0, intVar3 = 0;
@@ -72,30 +79,19 @@ public class Logic extends Statement {
 
     public static void initOthersProcess(String[] tokens) {
         if (tokens[0].equals("for")) {
-            //Todo write something here for Loop
+            Loop loop = new Loop(tokens);
         } else if (tokens[0].equals("print")) {
             Print print = new Print(tokens);
         }
     }
 
-    public static void initFloatVariable(String[] tokens) {
-        if (tokens.length == 4) {
-            Variable variable3 = new Variable(tokens[1], Float.parseFloat(tokens[3]));
-        } else {
-            Variable variable4 = new Variable(tokens[0], tokens[1]);
-        }
-    }
-
-    public static void initIntVariable(String[] tokens) {
-        if (tokens.length == 4) {
-            Variable variable1 = new Variable(tokens[1], Integer.parseInt(tokens[3]));
-        } else {
-            Variable variable2 = new Variable(tokens[0], tokens[1]);
-        }
-    }
 
     @Override
     public void execute(String[] tokens) {
-
+        if (tokens.length == 5) {
+            initAttributionProcess(tokens);
+        } else if (tokens.length == 2) {
+            initOthersProcess(tokens);
+        }
     }
 }

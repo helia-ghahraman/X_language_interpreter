@@ -21,10 +21,6 @@ public class Program {
 //        System.out.println(intVariables);
 //        System.out.println(floatVariables);
 //        System.out.println("***" + intVariables.get("sum"));
-
-//        int & = 0;
-//        System.out.println("****");
-//        System.out.println(&);
     }
 
     //Other methods ... *******************************************************************
@@ -32,12 +28,10 @@ public class Program {
         Boolean faz1 = true; //true -> faz1, false -> faz2
         try {
             Scanner sc = new Scanner(f);
-
             while (faz1) {
                 String line = sc.nextLine();
                 line.trim();
                 if (line.isEmpty()) continue;
-
                 String[] tokens = line.split(" ");
 //            System.out.println(Arrays.toString(tokens));
                 switch (tokens[0]) {
@@ -45,10 +39,8 @@ public class Program {
                         faz1 = false; //jump to faz2
                         break;
                     case "int":
-                        Logic.initIntVariable(tokens);
-                        break;
                     case "float":
-                        Logic.initFloatVariable(tokens);
+                        GiveValue giveValue = new GiveValue(tokens);
                         break;
                     default:
                         throw new IllegalArgumentException("Illegal Data Type");
@@ -61,13 +53,11 @@ public class Program {
 //            System.out.println(Arrays.toString(tokens));
                 switch (tokens.length) {
                     case 5:
-                        Logic.initAttributionProcess(tokens);
+                    case 2:
+                        Logic logic = new Logic(tokens);
                         break;
                     case 3:
-                        Process.defineProcess(tokens);
-                        break;
-                    case 2:
-                        Logic.initOthersProcess(tokens);
+                        GiveValue giveValue = new GiveValue(tokens);
                         break;
                 }
             }
@@ -77,5 +67,4 @@ public class Program {
             e.printStackTrace();
         }
     }
-
 }

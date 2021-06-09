@@ -1,6 +1,28 @@
 package Interpreter2;
 
-public class Process extends Statement {
+public class GiveValue extends Statement {
+
+    public GiveValue(String[] tokens) {
+        execute(tokens);
+    }
+
+    //Methods ***********************************************************
+    public static void initIntVariable(String[] tokens) {
+        if (tokens.length == 4) {
+            Variable variable1 = new Variable(tokens[1], Integer.parseInt(tokens[3]));
+        } else {
+            Variable variable2 = new Variable(tokens[0], tokens[1]);
+        }
+    }
+
+    public static void initFloatVariable(String[] tokens) {
+        if (tokens.length == 4) {
+            Variable variable3 = new Variable(tokens[1], Float.parseFloat(tokens[3]));
+        } else {
+            Variable variable4 = new Variable(tokens[0], tokens[1]);
+        }
+    }
+
     public static void defineProcess(String[] tokens) {
         int intVar1 = 0, intVar2 = 0;
         float floatVar1 = 0, floatVar2 = 0;
@@ -31,6 +53,15 @@ public class Process extends Statement {
 
     @Override
     public void execute(String[]tokens) {
-
+        switch (tokens[0]) {
+            case "int":
+                initIntVariable(tokens);
+                break;
+            case "float":
+                initFloatVariable(tokens);
+                break;
+            default:
+                defineProcess(tokens);
+        }
     }
 }
