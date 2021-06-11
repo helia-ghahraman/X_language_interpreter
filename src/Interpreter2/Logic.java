@@ -9,60 +9,53 @@ public class Logic extends Statement {
     //Methods *****************************************
 
     public static void initAttributionProcess(String[] tokens) {
-
-        int intVar1 = 0, intVar2 = 0, intVar3 = 0;
-        float floatVar1 = 0, floatVar2 = 0, floatVar3 = 0;
+        int intVar1 = 0;//, var2 = 0, var3 = 0;
+        float var1 = 0, var2 = 0, var3 = 0;
 
 
         if (Variable.intVariables.containsKey(tokens[0])) {
             intVar1 = Variable.intVariables.get(tokens[0]);
         } else {
-            floatVar1 = Variable.floatVariables.get(tokens[0]);
+            var1 = Variable.floatVariables.get(tokens[0]);
         }
 
         if (Variable.intVariables.containsKey(tokens[2]))
-            intVar2 = Variable.intVariables.get(tokens[2]);
+            var2 = Variable.intVariables.get(tokens[2]);
         else if (Variable.floatVariables.containsKey(tokens[2]))
-            floatVar2 = Variable.floatVariables.get(tokens[2]);
+            var2 = Variable.floatVariables.get(tokens[2]);
         else {
-            floatVar2 = Float.parseFloat(tokens[2]);
+            var2 = Float.parseFloat(tokens[2]);
         }
 
         if (Variable.intVariables.containsKey(tokens[4]))
-            intVar3 = Variable.intVariables.get(tokens[4]);
+            var3 = Variable.intVariables.get(tokens[4]);
         else if (Variable.floatVariables.containsKey(tokens[4]))
-            floatVar3 = Variable.floatVariables.get(tokens[4]);
+            var3 = Variable.floatVariables.get(tokens[4]);
         else {
-            floatVar3 = Float.parseFloat(tokens[4]);
+            var3 = Float.parseFloat(tokens[4]);
         }
 
         switch (tokens[3]) {
             case "+":
-                intVar1 = (int) (intVar2 + intVar3 + floatVar2 + floatVar3);
-                floatVar1 = intVar2 + intVar3 + floatVar2 + floatVar3;
+                intVar1 = (int) (var2 + var3);
+                var1 = var2 + var3 ;
                 break;
             case "-":
-                intVar1 = (int) (intVar2 - intVar3 + floatVar2 - floatVar3);
-                floatVar1 = intVar2 - intVar3 + floatVar2 - floatVar3;
+                intVar1 = (int) (var2 - var3 );
+                var1 = var2 - var3;
                 break;
             case "*":
-                intVar1 = (int) ((intVar2 * intVar3) + (floatVar2 * floatVar3) + (intVar2 * floatVar3) + (floatVar2 * intVar3));
-                floatVar1 = (intVar2 * intVar3) + (floatVar2 * floatVar3) + (intVar2 * floatVar3) + (floatVar2 * intVar3);
+               intVar1 = (int) (var2 * var3);
+                var1 = (var2 * var3);
                 break;
             case "/":
 
-                if ((intVar2 != 0) && (intVar3 != 0)) {
-                    intVar1 = intVar2 / intVar3;
-                    floatVar1 = intVar1 / intVar2;
-                } else if ((floatVar2 != 0) && (floatVar3 != 0)) {
-                    intVar1 = (int) (floatVar2 / floatVar3);
-                    floatVar1 = floatVar2 / floatVar3;
-                } else if ((intVar2 != 0) && (floatVar3 != 0)) {
-                    intVar1 = (int) (intVar2 / floatVar3);
-                    floatVar1 = intVar2 / floatVar3;
-                } else if ((floatVar2 != 0) && (intVar3 != 0)) {
-                    intVar1 = (int) (floatVar2 / intVar3);
-                    floatVar1 = floatVar2 / intVar3;
+                if ((var2 != 0) && (var3 != 0)) {
+                    intVar1 = (int) (var2 / var3);
+                    var1 = var1 / var2;
+                }else {
+                    intVar1=0;
+                    var1=0;
                 }
                 break;
         }
@@ -72,7 +65,7 @@ public class Logic extends Statement {
             Variable.intVariables.put(tokens[0], intVar1);
         } else if (Variable.floatVariables.containsKey(tokens[0])) {
             Variable.floatVariables.remove(tokens[0]);
-            Variable.floatVariables.put(tokens[0], floatVar1);
+            Variable.floatVariables.put(tokens[0], var1);
         }
 
     }
@@ -84,7 +77,6 @@ public class Logic extends Statement {
             Print print = new Print(tokens);
         }
     }
-
 
     @Override
     public void execute(String[] tokens) {

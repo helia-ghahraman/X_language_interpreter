@@ -9,7 +9,8 @@ public class Program {
     static Integer endLoopLineNumber = 0;
 
     //Main Method ... ********************************************************************
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args)  {
+        System.out.println("baghali");
 
         File f = new File("TextFiles//src1.txt");
         if (f.isDirectory()) {
@@ -33,7 +34,6 @@ public class Program {
                 line.trim();
                 if (line.isEmpty()) continue;
                 String[] tokens = line.split(" ");
-//            System.out.println(Arrays.toString(tokens));
                 switch (tokens[0]) {
                     case "%%":
                         faz1 = false; //jump to faz2
