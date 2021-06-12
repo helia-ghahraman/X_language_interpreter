@@ -1,36 +1,33 @@
 package Interpreter2;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.util.Scanner;
 
 public class Program {
-    static Integer lineNumber = 0;
-    static Integer endLoopLineNumber = 0;
+    static Integer lineNumber = 1;
+    static String path = null;
 
     //Main Method ... ********************************************************************
-    public static void main(String[] args) {
-//        System.out.println("baghali");
-
-        File f = new File("TextFiles//src4.txt");
-        if (f.isDirectory()) {
+    public static void main(String[] args) throws IOException {
+        path = "TextFiles//src2.txt";
+        File file = new File(path);
+        if (file.isDirectory()) {
             throw new IllegalArgumentException("there is a directory...");
-        } else if (f.isFile()) {
-            readFile(f);
+        } else if (file.isFile()) {
+            readFile(file, false);
         }
-
-//        System.out.println(intVariables);
-//        System.out.println(floatVariables);
-//        System.out.println("***" + intVariables.get("sum"));
     }
 
     //Other methods ... *******************************************************************
-    public static void readFile(File f)  {
+    public static void readFile(File f, boolean loop) throws IOException {
         Boolean faz1 = true; //true -> faz1, false -> faz2
+
         try {
             Scanner sc = new Scanner(f);
             while (faz1) {
+//                String line = getLine(lineNumber, path);
                 String line = sc.nextLine();
+                lineNumber++;
                 line.trim();
                 if (line.isEmpty()) continue;
                 String[] tokens = line.split(" ");
@@ -46,9 +43,16 @@ public class Program {
                         throw new IllegalArgumentException("Illegal Data Type");
                 }
             }
+            //start faz2
             while (sc.hasNextLine()) {
-                String line = sc.nextLine();
-                if (line.isEmpty()) continue;
+                String line = null;
+                if (!loop) {
+                    line = sc.nextLine();
+                } else {
+                    line = getLine(lineNumber, path);
+                }
+                lineNumber++;
+                if (sc.hasNextLine() && line.isEmpty()) continue;
                 String[] tokens = line.split(" ");
 //            System.out.println(Arrays.toString(tokens));
                 switch (tokens.length) {
@@ -62,9 +66,18 @@ public class Program {
                 }
             }
             sc.close();
-        }
-        catch (FileNotFoundException e){
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+    }
+
+    public static String getLine(int lineNum, String path) throws IOException {
+        String line;
+        BufferedReader bufferedReader = new BufferedReader(new FileReader(path));
+        for (int i = 0; i < lineNum - 1; i++) {
+            bufferedReader.readLine();
+        }
+        line = bufferedReader.readLine();
+        return line;
     }
 }

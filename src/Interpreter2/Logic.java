@@ -1,8 +1,10 @@
 package Interpreter2;
 
+import java.io.IOException;
+
 public class Logic extends Statement {
 
-    public Logic(String[] tokens) {
+    public Logic(String[] tokens) throws IOException {
         execute(tokens);
     }
 
@@ -62,20 +64,45 @@ public class Logic extends Statement {
 
     }
 
-    public static void initOthersProcess(String[] tokens) {
+    public static void initOthersProcess(String[] tokens) throws IOException {
         if (tokens[0].equals("for")) {
-            Loop loop = new Loop(tokens);
+            int start = Program.lineNumber;
+            int finish = start + search(start);
+            Loop loop = new Loop(tokens, start, finish);
+            System.out.println("tamammmmmmmmmmmmmmmmm");
+
         } else if (tokens[0].equals("print")) {
             Print print = new Print(tokens);
         }
     }
 
     @Override
-    public void execute(String[] tokens) {
+    public void execute(String[] tokens) throws IOException {
         if (tokens.length == 5) {
             initAttributionProcess(tokens);
         } else if (tokens.length == 2) {
             initOthersProcess(tokens);
         }
+    }
+
+
+    private static int search(int start) throws IOException {
+        String path = Program.path;
+        String line = null;
+        int conuter = start;
+        boolean sw = true;
+        String[] array = null;
+        while (sw) {
+            line = Program.getLine(conuter, path);
+            conuter++;
+            array = line.split(" ");
+
+            if (array[0].equals("end")) {
+                sw = false;
+                return conuter;
+            }
+
+        }
+        return 0;
     }
 }

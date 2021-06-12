@@ -1,7 +1,10 @@
 package Interpreter2;
 
 public class Loop extends Statement {
-    public Loop(String[] tokens) {
+    private int startLoopLine;
+    private int endLoopLine;
+
+    public Loop(String[] tokens, int start, int finish) {
         execute(tokens);
     }
 
