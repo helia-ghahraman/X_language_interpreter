@@ -29,8 +29,3 @@ print *******
 sum = 100
 print sum
 print *******
-
-
-
-
-

@@ -2,8 +2,6 @@ package Interpreter2;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.RandomAccessFile;
 import java.util.Scanner;
 
 public class Program {
@@ -11,20 +9,21 @@ public class Program {
     static Integer endLoopLineNumber = 0;
 
     //Main Method ... ********************************************************************
-    public static void main(String[] args) throws IOException {
-        File file=new File("TextFiles//src1.txt");
-        //File f = new File("TextFiles//src1.txt");
-        if (file.isDirectory()) {
+    public static void main(String[] args) {
+//        System.out.println("baghali");
+
+        File f = new File("TextFiles//src4.txt");
+        if (f.isDirectory()) {
             throw new IllegalArgumentException("there is a directory...");
-        } else if (file.isFile()) {
-            readFile(file);
+        } else if (f.isFile()) {
+            readFile(f);
         }
-        Line line=new Line();
-        String line2=line.getLine(3);
+
 //        System.out.println(intVariables);
 //        System.out.println(floatVariables);
 //        System.out.println("***" + intVariables.get("sum"));
     }
+
     //Other methods ... *******************************************************************
     public static void readFile(File f)  {
         Boolean faz1 = true; //true -> faz1, false -> faz2

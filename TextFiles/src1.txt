@@ -1,13 +1,15 @@
-int x = 10
-float y = 30
-int z = 50
+float x = 10.5
+int y = 0
+float z = 50.9
 float u = 80.502
 int t = 40
 float w = -0.5
 float sum
 %%
-sum = x / y
+sum =  y / x
+print ***
 print sum
+print ***
 sum = z * u
 print sum
 sum = t + w
@@ -15,4 +17,3 @@ print sum
 sum = z - u
 print sum
 print علی‌سلام
-
