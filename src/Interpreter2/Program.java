@@ -53,21 +53,24 @@ public class Program {
                 }
                 lineNumber++;
                 if (sc.hasNextLine() && line.isEmpty()) continue;
-                String[] tokens = line.split(" ");
-//            System.out.println(Arrays.toString(tokens));
-                switch (tokens.length) {
-                    case 5:
-                    case 2:
-                        Logic logic = new Logic(tokens);
-                        break;
-                    case 3:
-                        GiveValue giveValue = new GiveValue(tokens);
-                        break;
-                }
+                makeTokens(line);
             }
             sc.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+        }
+    }
+
+    public static void makeTokens(String line) throws IOException {
+        String[] tokens = line.split(" ");
+        switch (tokens.length) {
+            case 5:
+            case 2:
+                Logic logic = new Logic(tokens);
+                break;
+            case 3:
+                GiveValue giveValue = new GiveValue(tokens);
+                break;
         }
     }
 

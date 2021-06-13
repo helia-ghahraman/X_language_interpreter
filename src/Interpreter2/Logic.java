@@ -1,6 +1,7 @@
 package Interpreter2;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Logic extends Statement {
 
@@ -66,11 +67,10 @@ public class Logic extends Statement {
 
     public static void initOthersProcess(String[] tokens) throws IOException {
         if (tokens[0].equals("for")) {
+            ArrayList<String> codes = new ArrayList();
             int start = Program.lineNumber;
-            int finish = start + search(start);
-            Loop loop = new Loop(tokens, start, finish);
-            System.out.println("tamammmmmmmmmmmmmmmmm");
-
+            int finish = search(start, codes);
+            Loop loop = new Loop(tokens, start, finish, codes);
         } else if (tokens[0].equals("print")) {
             Print print = new Print(tokens);
         }
@@ -86,22 +86,21 @@ public class Logic extends Statement {
     }
 
 
-    private static int search(int start) throws IOException {
-        String path = Program.path;
+    private static int search(int start, ArrayList codes) throws IOException {
         String line = null;
         int conuter = start;
         boolean sw = true;
         String[] array = null;
         while (sw) {
-            line = Program.getLine(conuter, path);
-            conuter++;
+            line = Program.getLine(conuter, Program.path);
             array = line.split(" ");
 
             if (array[0].equals("end")) {
                 sw = false;
-                return conuter;
+                return (conuter - 1);
             }
-
+            codes.add(line);
+            conuter++;
         }
         return 0;
     }

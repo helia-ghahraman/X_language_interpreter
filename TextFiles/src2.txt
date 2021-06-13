@@ -1,6 +1,7 @@
-int numer = 1
+int number = 1
 %%
-for 100
-print number
+for 5
 number = number + 1
+print number
 end for
+print ***[
