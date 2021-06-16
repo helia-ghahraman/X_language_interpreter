@@ -1,8 +1,15 @@
 int number = 1
 %%
-print 2
 
 for 3
+print *
+
+for 2
 number = number + 1
+print **
 end for
-print ***
+
+print kkkkk
+end for
+
+print finished...

@@ -4,12 +4,12 @@ import java.io.*;
 import java.util.Scanner;
 
 public class Program {
-    static Integer lineNumber = 1;
+    static Integer lineNumber = 0;
     static String path = null;
 
     //Main Method ... ********************************************************************
     public static void main(String[] args) throws IOException {
-        path = "TextFiles//src2.txt";
+        path = "TextFiles//src6.txt";
         File file = new File(path);
         if (file.isDirectory()) {
             throw new IllegalArgumentException("there is a directory...");
@@ -47,6 +47,7 @@ public class Program {
             while (sc.hasNextLine()) {
                 String line = null;
                 line = sc.nextLine();
+//                line = getLine(lineNumber, path);
                 lineNumber++;
                 if (sc.hasNextLine() && line.isEmpty()) continue;
                 makeTokens(line);
@@ -59,6 +60,7 @@ public class Program {
 
     public static void makeTokens(String line) throws IOException {
         String[] tokens = line.split(" ");
+        lineNumber++;
         switch (tokens.length) {
             case 5:
             case 2:

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class Logic extends Statement {
+    static ArrayList<String> codes = null;
 
     public Logic(String[] tokens) throws IOException {
         execute(tokens);
@@ -65,11 +66,13 @@ public class Logic extends Statement {
 
     }
 
-    public static void initOthersProcess(String[] tokens) throws IOException {
+    public void initOthersProcess(String[] tokens) throws IOException {
         if (tokens[0].equals("for")) {
-            ArrayList<String> codes = new ArrayList();
+            codes = new ArrayList();
             int start = Program.lineNumber;
             int finish = search(start, codes);
+            System.out.println("start: " + start);
+            System.out.println("finish: " + finish);
             Loop loop = new Loop(tokens, start, finish, codes);
         } else if (tokens[0].equals("print")) {
             Print print = new Print(tokens);
@@ -86,8 +89,10 @@ public class Logic extends Statement {
     }
 
 
-    private static int search(int start, ArrayList codes) throws IOException {
+    private int search(int start, ArrayList codes) throws IOException {
         String line = null;
+        int forCounter = 0;
+        int endCounter = 0;
         int conuter = start;
         boolean sw = true;
         String[] array = null;
@@ -95,10 +100,15 @@ public class Logic extends Statement {
             line = Program.getLine(conuter, Program.path);
             array = line.split(" ");
 
-            if (array[0].equals("end")) {
+            if (array[0].equals("for")) {
+                forCounter++;
+            } else if (array[0].equals("end") && (endCounter < forCounter)) {
+                endCounter++;
+            } else if (array[0].equals("end") && (endCounter == forCounter)) {
                 sw = false;
                 return (conuter - 1);
             }
+
             codes.add(line);
             conuter++;
         }

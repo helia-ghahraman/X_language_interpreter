@@ -1,0 +1,8 @@
+int number = 1
+%%
+
+for 2
+print *
+end for
+
+print finished...
