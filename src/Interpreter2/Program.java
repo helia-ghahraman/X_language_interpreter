@@ -14,12 +14,12 @@ public class Program {
         if (file.isDirectory()) {
             throw new IllegalArgumentException("there is a directory...");
         } else if (file.isFile()) {
-            readFile(file, false);
+            readFile(file);
         }
     }
 
     //Other methods ... *******************************************************************
-    public static void readFile(File f, boolean loop) throws IOException {
+    public static void readFile(File f) throws IOException {
         Boolean faz1 = true; //true -> faz1, false -> faz2
 
         try {
@@ -46,11 +46,7 @@ public class Program {
             //start faz2
             while (sc.hasNextLine()) {
                 String line = null;
-                if (!loop) {
-                    line = sc.nextLine();
-                } else {
-                    line = getLine(lineNumber, path);
-                }
+                line = sc.nextLine();
                 lineNumber++;
                 if (sc.hasNextLine() && line.isEmpty()) continue;
                 makeTokens(line);

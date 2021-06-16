@@ -1,7 +1,8 @@
 int number = 1
 %%
-for 5
+print 2
+
+for 3
 number = number + 1
-print number
 end for
-print ***[
+print ***
