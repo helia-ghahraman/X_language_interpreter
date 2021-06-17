@@ -1,11 +1,10 @@
 int number = 1
 %%
 
-for 3
+for 2
 print *
 
 for 2
-number = number + 1
 print **
 end for
 

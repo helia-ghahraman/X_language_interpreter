@@ -9,7 +9,7 @@ public class Program {
 
     //Main Method ... ********************************************************************
     public static void main(String[] args) throws IOException {
-        path = "TextFiles//src6.txt";
+        path = "TextFiles//src2.txt";
         File file = new File(path);
         if (file.isDirectory()) {
             throw new IllegalArgumentException("there is a directory...");
@@ -25,7 +25,7 @@ public class Program {
         try {
             Scanner sc = new Scanner(f);
             while (faz1) {
-//                String line = getLine(lineNumber, path);
+//                String line = getLine(1, path);
                 String line = sc.nextLine();
                 lineNumber++;
                 line.trim();
@@ -47,9 +47,10 @@ public class Program {
             while (sc.hasNextLine()) {
                 String line = null;
                 line = sc.nextLine();
-//                line = getLine(lineNumber, path);
                 lineNumber++;
                 if (sc.hasNextLine() && line.isEmpty()) continue;
+                String[] tokens = line.split(" ");
+                if (tokens[0].equals("for"))gotoEnd(path,sc);
                 makeTokens(line);
             }
             sc.close();
@@ -81,4 +82,21 @@ public class Program {
         line = bufferedReader.readLine();
         return line;
     }
+    public static void gotoEnd(String path, Scanner sc) throws IOException {
+        String line=null;
+        int forCount=1;
+        String[]tokens = null;
+        for (int i=0;sc.hasNextLine();i++){
+            line=sc.nextLine();
+            tokens = line.split(" ");
+            if (tokens[0].equals("for")) forCount++;
+            if (tokens[0].equals("end"))break;
+        }
+        for (int i=1;i<forCount;){
+            line=sc.nextLine();
+            tokens = line.split(" ");
+            if (tokens[0].equals("end"))i++;
+        }
+    }
+
 }

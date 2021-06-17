@@ -108,7 +108,6 @@ public class Logic extends Statement {
                 sw = false;
                 return (conuter - 1);
             }
-
             codes.add(line);
             conuter++;
         }
