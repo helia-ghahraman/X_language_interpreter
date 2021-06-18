@@ -3,6 +3,11 @@ int number = 1
 
 for 2
 print *
+number = number + 1
 end for
 
+for 3
+print hi
+print number
+end for
 print finished...

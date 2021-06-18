@@ -9,7 +9,7 @@ public class Program {
 
     //Main Method ... ********************************************************************
     public static void main(String[] args) throws IOException {
-        path = "TextFiles//src2.txt";
+        path = "TextFiles//src6.txt";
         File file = new File(path);
         if (file.isDirectory()) {
             throw new IllegalArgumentException("there is a directory...");
@@ -21,11 +21,9 @@ public class Program {
     //Other methods ... *******************************************************************
     public static void readFile(File f) throws IOException {
         Boolean faz1 = true; //true -> faz1, false -> faz2
-
         try {
             Scanner sc = new Scanner(f);
             while (faz1) {
-//                String line = getLine(1, path);
                 String line = sc.nextLine();
                 lineNumber++;
                 line.trim();
@@ -48,7 +46,7 @@ public class Program {
                 String line = null;
                 line = sc.nextLine();
                 lineNumber++;
-                if (sc.hasNextLine() && line.isEmpty()) continue;
+                if (sc.hasNextLine() && line.isEmpty())continue;
                 String[] tokens = line.split(" ");
                 if (tokens[0].equals("for"))gotoEnd(path,sc);
                 makeTokens(line);
@@ -61,7 +59,6 @@ public class Program {
 
     public static void makeTokens(String line) throws IOException {
         String[] tokens = line.split(" ");
-        lineNumber++;
         switch (tokens.length) {
             case 5:
             case 2:

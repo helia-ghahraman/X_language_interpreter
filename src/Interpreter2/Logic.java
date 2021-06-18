@@ -12,6 +12,14 @@ public class Logic extends Statement {
 
     //Methods *****************************************
 
+    @Override
+    public void execute(String[] tokens) throws IOException {
+        if (tokens.length == 5) {
+            initAttributionProcess(tokens);
+        } else if (tokens.length == 2) {
+            initOthersProcess(tokens);
+        }
+    }
 
     public static void initAttributionProcess(String[] tokens) {
         float var1 = 0, var2 = 0, var3 = 0;
@@ -63,14 +71,15 @@ public class Logic extends Statement {
             Variable.floatVariables.remove(tokens[0]);
             Variable.floatVariables.put(tokens[0], var1);
         }
-
     }
 
     public void initOthersProcess(String[] tokens) throws IOException {
         if (tokens[0].equals("for")) {
             codes = new ArrayList();
             int start = Program.lineNumber;
+            System.out.println("start: " + start);
             int finish = search(start, codes);
+            Program.lineNumber=finish+1;
             System.out.println("start: " + start);
             System.out.println("finish: " + finish);
             Loop loop = new Loop(tokens, start, finish, codes);
@@ -79,35 +88,20 @@ public class Logic extends Statement {
         }
     }
 
-    @Override
-    public void execute(String[] tokens) throws IOException {
-        if (tokens.length == 5) {
-            initAttributionProcess(tokens);
-        } else if (tokens.length == 2) {
-            initOthersProcess(tokens);
-        }
-    }
-
-
     private int search(int start, ArrayList codes) throws IOException {
         String line = null;
         int forCounter = 0;
         int endCounter = 0;
-        int conuter = start;
+        int conuter = start+1;
         boolean sw = true;
         String[] array = null;
         while (sw) {
             line = Program.getLine(conuter, Program.path);
             array = line.split(" ");
+            if (array[0].equals("for")) forCounter++;
+            else if (array[0].equals("end") && (endCounter < forCounter)) endCounter++;
+            else if (array[0].equals("end") && (endCounter == forCounter)) return (conuter - 1);
 
-            if (array[0].equals("for")) {
-                forCounter++;
-            } else if (array[0].equals("end") && (endCounter < forCounter)) {
-                endCounter++;
-            } else if (array[0].equals("end") && (endCounter == forCounter)) {
-                sw = false;
-                return (conuter - 1);
-            }
             codes.add(line);
             conuter++;
         }
