@@ -76,8 +76,7 @@ public class Logic extends Statement {
     public void initOthersProcess(String[] tokens) throws IOException {
         if (tokens[0].equals("for")) {
             codes = new ArrayList();
-            int start = Program.lineNumber;
-            System.out.println("start: " + start);
+            int start = Program.lineNumber-Loop.x;
             int finish = search(start, codes);
             Program.lineNumber=finish+1;
             System.out.println("start: " + start);
