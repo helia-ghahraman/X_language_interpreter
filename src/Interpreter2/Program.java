@@ -8,6 +8,7 @@ public class Program {
     static Integer lineNumber = 0;
     static String path = null;
     static ArrayList<String> codes = null;
+
     //Main Method ... ********************************************************************
     public static void main(String[] args) throws IOException {
         path = "TextFiles//src1.txt";
@@ -18,6 +19,7 @@ public class Program {
             readFile(file);
         }
     }
+
     //Other methods ... *******************************************************************
     public static void readFile(File f) throws IOException {
         Boolean faz1 = true; //true -> faz1, false -> faz2
@@ -46,9 +48,9 @@ public class Program {
                 String line = null;
                 line = sc.nextLine();
                 lineNumber++;
-                if (sc.hasNextLine() && line.isEmpty())continue;
+                if (sc.hasNextLine() && line.isEmpty()) continue;
                 String[] tokens = line.split(" ");
-                if (tokens[0].equals("for"))gotoEnd(path,sc);
+                if (tokens[0].equals("for")) gotoEnd(path, sc);
                 makeTokens(line);
             }
             sc.close();
@@ -72,39 +74,42 @@ public class Program {
         }
     }
 
-    public static void initOthersProcess(String[] tokens) throws IOException {
+    public static int initOthersProcess(String[] tokens) throws IOException {
         if (tokens[0].equals("for")) {
             codes = new ArrayList();
             int start = Program.lineNumber;
             int finish = search(start, codes);
-            Program.lineNumber=finish+1;
+            Program.lineNumber = finish + 1;
             System.out.println("start: " + start);
             System.out.println("finish: " + finish);
             Loop loop = new Loop(tokens, start, finish, codes);
         } else if (tokens[0].equals("print")) {
             Print print = new Print(tokens);
+            return print.getCharNumber();
         }
+        return 0;
     }
 
     private static int search(int start, ArrayList codes) throws IOException {
         String line = null;
         int forCounter = 0;
         int endCounter = 0;
-        int conuter = start+1;
+        int counter = start + 1;
         boolean sw = true;
         String[] array = null;
         while (sw) {
-            line = Program.getLine(conuter, Program.path);
+            line = Program.getLine(counter, Program.path);
             array = line.split(" ");
             if (array[0].equals("for")) forCounter++;
             else if (array[0].equals("end") && (endCounter < forCounter)) endCounter++;
-            else if (array[0].equals("end") && (endCounter == forCounter)) return (conuter - 1);
+            else if (array[0].equals("end") && (endCounter == forCounter)) return (counter - 1);
 
             codes.add(line);
-            conuter++;
+            counter++;
         }
         return 0;
     }
+
     public static String getLine(int lineNum, String path) throws IOException {
         String line;
         BufferedReader bufferedReader = new BufferedReader(new FileReader(path));
@@ -114,17 +119,18 @@ public class Program {
         line = bufferedReader.readLine();
         return line;
     }
-    public static void gotoEnd(String path, Scanner sc) throws IOException {
-        String line=null;
-        int forCount=1;
-        int endCount=0;
-        String[]tokens = null;
-        while (sc.hasNextLine()){
-            line=sc.nextLine();
+
+    public static void gotoEnd(String path, Scanner sc) {
+        String line = null;
+        int forCount = 1;
+        int endCount = 0;
+        String[] tokens = null;
+        while (sc.hasNextLine()) {
+            line = sc.nextLine();
             tokens = line.split(" ");
             if (tokens[0].equals("for")) forCount++;
-            if (tokens[0].equals("end"))endCount++;
-            if (endCount>=forCount)break;
+            if (tokens[0].equals("end")) endCount++;
+            if (endCount >= forCount) break;
             //System.out.println("line: "+line);
         }
     }

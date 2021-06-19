@@ -32,22 +32,15 @@ public class Print extends Statement {
     }
 
     public int getDigitF(float number) {
-        int num = 0;
-        //Todo change here
-//        while (number != 0){
-//            number /= 10;
-//            num++;
-//        }
-        return num;
+        String addad;
+        addad = Float.toString(number);
+        return addad.length();
     }
 
     public int getDigitI(int number) {
-        int num = 0;
-        while (number != 0) {
-            number /= 10;
-            num++;
-        }
-        return num;
+        String addad;
+        addad = Integer.toString(number);
+        return addad.length();
     }
 
 }
