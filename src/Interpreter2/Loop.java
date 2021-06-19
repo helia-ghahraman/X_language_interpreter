@@ -4,54 +4,48 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class Loop<length> extends Statement {
-    public static int x;
-    private int startLoopLine;
-    private int endLoopLine;
     private static int  length;
     private static ArrayList<String> codes = null;
 
     public Loop(String[] tokens, int start, int finish, ArrayList<String> codes) throws IOException {
         this.codes = codes;
-        startLoopLine = start;
-        endLoopLine = finish;
-        length = endLoopLine - startLoopLine;
-        getStart(codes);
+        length = finish - start;
         execute(tokens);
     }
-
     //*********************************************************
-
     @Override
     public void execute(String[] tokens) throws IOException {
-        String line = null;
+        String line=null;
         for (int j = 0; j < Integer.parseInt(tokens[1]); j++) {
-            for (int i = 0; i < length; i++) {
-                line = codes.get(i);
-                Program.makeTokens(line);
+            for (int i=0; i < length; i++) {
+                if (codes.get(i).startsWith("for")) {
+                    i= loop2(codes,i);
+                   // System.out.println("line if: "+codes.get(i)+"line: "+line);
+                }else {
+                    Program.makeTokens(codes.get(i));
+                    //System.out.println("line else: "+codes.get(i)+"line: "+line);
+                }
             }
         }
     }
 
-    public void getStart(ArrayList<String> codes ){
-        int counter=0;
-        for (int i=0;i<codes.size();i++){
-           if(codes.get(i).startsWith("for")){
-               counter=i+1;
-               this.x=length-counter+1;
-           }
-        }
-    }
-   /* @Override
-    public void execute(String[] tokens) throws IOException {
-        int endCount=0;
-        int forCount=0;
-        int length = endLoopLine - startLoopLine;
-        for (int i=0;codes.get(i)!=null)
-        for (int j = 0; j < Integer.parseInt(tokens[1]); j++) {
-            for (int i = 0; i <= length; i++) {
-                if (codes.get(i).equals("for"))forCount++;
-                Program.makeTokens(codes.get(i));
+    public int loop2(ArrayList<String> codes,int i) throws IOException {
+        int start=i;
+        int finish=0;
+        String[] tokens=codes.get(i).split(" ");
+        int v=Integer.parseInt(tokens[1]);
+        for (int k=0;k<v;k++){
+            while (!codes.get(i+1).startsWith("end")) {
+                if (codes.get(i+1).startsWith("for")){
+                    i= loop2(codes,i+1)-1;
+                }
+                else Program.makeTokens(codes.get(i+1));
+                i++;
             }
+            finish=i+1;
+            i=start;
         }
-    }*/
+        return finish;
+    }
 }
+

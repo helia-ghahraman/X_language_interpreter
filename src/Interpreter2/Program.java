@@ -10,7 +10,7 @@ public class Program {
     static ArrayList<String> codes = null;
     //Main Method ... ********************************************************************
     public static void main(String[] args) throws IOException {
-        path = "TextFiles//src2.txt";
+        path = "TextFiles//src1.txt";
         File file = new File(path);
         if (file.isDirectory()) {
             throw new IllegalArgumentException("there is a directory...");
@@ -64,7 +64,7 @@ public class Program {
                 Logic logic = new Logic(tokens);
                 break;
             case 2:
-                initOthersProcess(tokens);;
+                initOthersProcess(tokens);
                 break;
             case 3:
                 GiveValue giveValue = new GiveValue(tokens);
@@ -75,7 +75,7 @@ public class Program {
     public static void initOthersProcess(String[] tokens) throws IOException {
         if (tokens[0].equals("for")) {
             codes = new ArrayList();
-            int start = Program.lineNumber-Loop.x;
+            int start = Program.lineNumber;
             int finish = search(start, codes);
             Program.lineNumber=finish+1;
             System.out.println("start: " + start);
@@ -117,17 +117,15 @@ public class Program {
     public static void gotoEnd(String path, Scanner sc) throws IOException {
         String line=null;
         int forCount=1;
+        int endCount=0;
         String[]tokens = null;
-        for (int i=0;sc.hasNextLine();i++){
+        while (sc.hasNextLine()){
             line=sc.nextLine();
             tokens = line.split(" ");
             if (tokens[0].equals("for")) forCount++;
-            if (tokens[0].equals("end"))break;
-        }
-        for (int i=1;i<forCount;){
-            line=sc.nextLine();
-            tokens = line.split(" ");
-            if (tokens[0].equals("end"))i++;
+            if (tokens[0].equals("end"))endCount++;
+            if (endCount>=forCount)break;
+            //System.out.println("line: "+line);
         }
     }
 }
