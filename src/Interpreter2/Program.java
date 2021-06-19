@@ -1,15 +1,16 @@
 package Interpreter2;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Program {
     static Integer lineNumber = 0;
     static String path = null;
-
+    static ArrayList<String> codes = null;
     //Main Method ... ********************************************************************
     public static void main(String[] args) throws IOException {
-        path = "TextFiles//src6.txt";
+        path = "TextFiles//src2.txt";
         File file = new File(path);
         if (file.isDirectory()) {
             throw new IllegalArgumentException("there is a directory...");
@@ -17,7 +18,6 @@ public class Program {
             readFile(file);
         }
     }
-
     //Other methods ... *******************************************************************
     public static void readFile(File f) throws IOException {
         Boolean faz1 = true; //true -> faz1, false -> faz2
@@ -61,8 +61,10 @@ public class Program {
         String[] tokens = line.split(" ");
         switch (tokens.length) {
             case 5:
-            case 2:
                 Logic logic = new Logic(tokens);
+                break;
+            case 2:
+                initOthersProcess(tokens);;
                 break;
             case 3:
                 GiveValue giveValue = new GiveValue(tokens);
@@ -70,6 +72,39 @@ public class Program {
         }
     }
 
+    public static void initOthersProcess(String[] tokens) throws IOException {
+        if (tokens[0].equals("for")) {
+            codes = new ArrayList();
+            int start = Program.lineNumber-Loop.x;
+            int finish = search(start, codes);
+            Program.lineNumber=finish+1;
+            System.out.println("start: " + start);
+            System.out.println("finish: " + finish);
+            Loop loop = new Loop(tokens, start, finish, codes);
+        } else if (tokens[0].equals("print")) {
+            Print print = new Print(tokens);
+        }
+    }
+
+    private static int search(int start, ArrayList codes) throws IOException {
+        String line = null;
+        int forCounter = 0;
+        int endCounter = 0;
+        int conuter = start+1;
+        boolean sw = true;
+        String[] array = null;
+        while (sw) {
+            line = Program.getLine(conuter, Program.path);
+            array = line.split(" ");
+            if (array[0].equals("for")) forCounter++;
+            else if (array[0].equals("end") && (endCounter < forCounter)) endCounter++;
+            else if (array[0].equals("end") && (endCounter == forCounter)) return (conuter - 1);
+
+            codes.add(line);
+            conuter++;
+        }
+        return 0;
+    }
     public static String getLine(int lineNum, String path) throws IOException {
         String line;
         BufferedReader bufferedReader = new BufferedReader(new FileReader(path));
@@ -95,5 +130,4 @@ public class Program {
             if (tokens[0].equals("end"))i++;
         }
     }
-
 }
