@@ -1,8 +1,8 @@
-      float      n
-n   =   50.15
-    int   r
- r =   n
-m =         50
-    %%
-    print n
- print r
+float   r = 52.051515
+int  n = ssaacca
+%%
+
+print n:
+print n
+ print r:
+print r

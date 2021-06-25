@@ -12,7 +12,8 @@ public class Program {
     //Main Method ... ********************************************************************
 
     public static void main(String[] args) throws IOException {
-        path = "TextFiles//src4.txt";
+        path = "TextFiles//src5.txt";
+
         File file = new File(path);
         if (file.isDirectory()) {
             throw new IllegalArgumentException("there is a directory...");
