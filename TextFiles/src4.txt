@@ -1,9 +1,11 @@
-int n = 1
-n =   5
+int n
+float m = 5.5
+n = m
     int sum
 %%
 print n:
 print n
+
 
 sum = n + n
 print sum

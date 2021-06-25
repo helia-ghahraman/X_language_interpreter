@@ -8,27 +8,43 @@ public class GiveValue extends Statement {
 
     //Methods ***********************************************************
     public static void initIntVariable(String[] tokens) {
-        if (tokens.length == 4) {
-            if (Variable.intVariables.containsKey(tokens[3])) {
-                Variable variable3 = new Variable(tokens[1], Variable.intVariables.get(tokens[3]));
-                //Todo add try & catch
+        try {
+            if (tokens.length == 4) {
+                if (Variable.intVariables.containsKey(tokens[3])) {
+                    Variable variable3 = new Variable(tokens[1], Variable.intVariables.get(tokens[3]));
+                } else if (Variable.floatVariables.containsKey(tokens[3])) {
+                    System.err.println("Warning!\nYou are assigning a Float value to an Integer value (at line: "
+                            + Program.lineNumber + ")");
+                    Variable variable3 = new Variable(tokens[1], (int) Math.floor(Variable.floatVariables.get(tokens[3])));
+                } else {
+                    Variable variable3 = new Variable(tokens[1], Integer.parseInt(tokens[3]));
+                }
             } else {
-                Variable variable3 = new Variable(tokens[1], Integer.parseInt(tokens[3]));
+                Variable variable2 = new Variable(tokens[0], tokens[1]);
             }
-        } else {
+        } catch (Exception e) {
+            System.err.println(e.getMessage() + " (at line: " + Program.lineNumber + ")");
             Variable variable2 = new Variable(tokens[0], tokens[1]);
         }
     }
 
     public static void initFloatVariable(String[] tokens) {
-        if (tokens.length == 4) {
-            if (Variable.floatVariables.containsKey(tokens[3])) {
-                Variable variable3 = new Variable(tokens[1], Variable.floatVariables.get(tokens[3]));
-                //Todo add try & catch
+        try {
+            if (tokens.length == 4) {
+                if (Variable.floatVariables.containsKey(tokens[3])) {
+                    Variable variable3 = new Variable(tokens[1], Variable.floatVariables.get(tokens[3]));
+                } else if (Variable.intVariables.containsKey(tokens[3])) {
+                    System.err.println("Warning!\nYou are assigning an Integer value to a Float value (at line: "
+                            + Program.lineNumber + ")");
+                    Variable variable3 = new Variable(tokens[1], (float) Variable.intVariables.get(tokens[3]));
+                } else {
+                    Variable variable3 = new Variable(tokens[1], Float.parseFloat(tokens[3]));
+                }
             } else {
-                Variable variable3 = new Variable(tokens[1], Float.parseFloat(tokens[3]));
+                Variable variable4 = new Variable(tokens[0], tokens[1]);
             }
-        } else {
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
             Variable variable4 = new Variable(tokens[0], tokens[1]);
         }
     }
@@ -62,7 +78,8 @@ public class GiveValue extends Statement {
                 Variable.floatVariables.put(tokens[0], floatVar1);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            System.err.println(e.getMessage() + " (at line: " + Program.lineNumber + ")");
+            //Todo change here for line number
         }
 
     }
