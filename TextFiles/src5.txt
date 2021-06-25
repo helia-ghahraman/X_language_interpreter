@@ -1,4 +1,8 @@
-int s = 1
+float n
+n = 50.15
+int r
+r = n
+m = 50
 %%
-s = s + 1
-print s
+print n
+print r
