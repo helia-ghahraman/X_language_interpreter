@@ -11,7 +11,7 @@ public class Program {
 
     //Main Method ... ********************************************************************
     public static void main(String[] args) throws IOException {
-        path = "TextFiles//src1.txt";
+        path = "TextFiles//src6.txt";
         File file = new File(path);
         if (file.isDirectory()) {
             throw new IllegalArgumentException("there is a directory...");
@@ -30,6 +30,7 @@ public class Program {
                 lineNumber++;
                 line.trim();
                 if (line.isEmpty()) continue;
+                line=line.replaceAll(" +"," ");
                 String[] tokens = line.split(" ");
                 switch (tokens[0]) {
                     case "%%":
@@ -49,6 +50,7 @@ public class Program {
                 line = sc.nextLine();
                 lineNumber++;
                 if (sc.hasNextLine() && line.isEmpty()) continue;
+               line=line.replaceAll(" +"," ");
                 String[] tokens = line.split(" ");
                 if (tokens[0].equals("for")) gotoEnd(path, sc);
                 makeTokens(line);
@@ -80,8 +82,6 @@ public class Program {
             int start = Program.lineNumber;
             int finish = search(start, codes);
             Program.lineNumber = finish + 1;
-            System.out.println("start: " + start);
-            System.out.println("finish: " + finish);
             Loop loop = new Loop(tokens, start, finish, codes);
         } else if (tokens[0].equals("print")) {
             Print print = new Print(tokens);

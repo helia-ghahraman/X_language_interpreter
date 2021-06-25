@@ -1,13 +1,13 @@
-int number = 1
+int    n = 4
 %%
-
-for 2
+print k
+for    2
 print *
-number = number + 1
-end for
 
-for 3
+end   for
+
+for   3
 print hi
-print number
+
 end for
 print finished...

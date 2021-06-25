@@ -20,10 +20,8 @@ public class Loop<length> extends Statement {
             for (int i=0; i < length; i++) {
                 if (codes.get(i).startsWith("for")) {
                     i= loop2(codes,i);
-                   // System.out.println("line if: "+codes.get(i)+"line: "+line);
                 }else {
                     Program.makeTokens(codes.get(i));
-                    //System.out.println("line else: "+codes.get(i)+"line: "+line);
                 }
             }
         }

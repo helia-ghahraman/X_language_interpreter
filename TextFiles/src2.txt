@@ -5,6 +5,11 @@ for 2
 print *
 
 for 3
+
+for 2
+print hi
+end for
+
 print **
 end for
 
