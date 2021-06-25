@@ -1,8 +1,8 @@
-float n
-n = 50.15
-int r
-r = n
-m = 50
-%%
-print n
-print r
+      float      n
+n   =   50.15
+    int   r
+ r =   n
+m =         50
+    %%
+    print n
+ print r

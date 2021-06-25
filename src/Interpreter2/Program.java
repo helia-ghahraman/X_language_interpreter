@@ -10,8 +10,9 @@ public class Program {
     static ArrayList<String> codes = null;
 
     //Main Method ... ********************************************************************
+
     public static void main(String[] args) throws IOException {
-        path = "TextFiles//src6.txt";
+        path = "TextFiles//src4.txt";
         File file = new File(path);
         if (file.isDirectory()) {
             throw new IllegalArgumentException("there is a directory...");
@@ -28,20 +29,14 @@ public class Program {
             while (faz1) {
                 String line = sc.nextLine();
                 lineNumber++;
-                line.trim();
+                line = line.trim();
                 if (line.isEmpty()) continue;
-                line=line.replaceAll(" +"," ");
+                line = line.replaceAll(" +", " ");
                 String[] tokens = line.split(" ");
-                switch (tokens[0]) {
-                    case "%%":
-                        faz1 = false; //jump to faz2
-                        break;
-                    case "int":
-                    case "float":
-                        GiveValue giveValue = new GiveValue(tokens);
-                        break;
-                    default:
-                        throw new IllegalArgumentException("Illegal Data Type");
+                if (tokens[0].equals("%%")) {
+                    faz1 = false; //jump to faz2
+                } else {
+                    GiveValue giveValue = new GiveValue(tokens);
                 }
             }
             //start faz2
@@ -50,7 +45,8 @@ public class Program {
                 line = sc.nextLine();
                 lineNumber++;
                 if (sc.hasNextLine() && line.isEmpty()) continue;
-               line=line.replaceAll(" +"," ");
+                line = line.trim();
+                line = line.replaceAll(" +", " ");
                 String[] tokens = line.split(" ");
                 if (tokens[0].equals("for")) gotoEnd(path, sc);
                 makeTokens(line);
@@ -62,6 +58,8 @@ public class Program {
     }
 
     public static void makeTokens(String line) throws IOException {
+        line = line.trim();
+        line = line.replaceAll(" +", " ");
         String[] tokens = line.split(" ");
         switch (tokens.length) {
             case 5:
@@ -82,6 +80,8 @@ public class Program {
             int start = Program.lineNumber;
             int finish = search(start, codes);
             Program.lineNumber = finish + 1;
+            System.out.println("start: " + start);
+            System.out.println("finish: " + finish);
             Loop loop = new Loop(tokens, start, finish, codes);
         } else if (tokens[0].equals("print")) {
             Print print = new Print(tokens);
@@ -99,6 +99,8 @@ public class Program {
         String[] array = null;
         while (sw) {
             line = Program.getLine(counter, Program.path);
+            line = line.trim();
+            line = line.replaceAll(" +", " ");
             array = line.split(" ");
             if (array[0].equals("for")) forCounter++;
             else if (array[0].equals("end") && (endCounter < forCounter)) endCounter++;
@@ -127,6 +129,8 @@ public class Program {
         String[] tokens = null;
         while (sc.hasNextLine()) {
             line = sc.nextLine();
+            line = line.trim();
+            line = line.replaceAll(" +", " ");
             tokens = line.split(" ");
             if (tokens[0].equals("for")) forCount++;
             if (tokens[0].equals("end")) endCount++;
