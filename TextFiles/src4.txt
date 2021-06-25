@@ -1,7 +1,9 @@
 int n = 1
-int sum
+n =   5
+    int sum
 %%
-
+print n:
+print n
 
 sum = n + n
 print sum

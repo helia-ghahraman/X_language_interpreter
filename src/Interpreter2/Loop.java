@@ -30,19 +30,20 @@ public class Loop<length> extends Statement {
     }
 
     public int loop2(ArrayList<String> codes,int i) throws IOException {
-        int start=i;
-        int finish=0;
-        String[] tokens=codes.get(i).split(" ");
-        int v=Integer.parseInt(tokens[1]);
-        for (int k=0;k<v;k++){
-            while (!codes.get(i+1).startsWith("end")) {
-                if (codes.get(i+1).startsWith("for")){
-                    i= loop2(codes,i+1)-1;
-                }
-                else Program.makeTokens(codes.get(i+1));
+        int start = i;
+        int finish = 0;
+//        String line=codes.get(i).replaceAll(" +"," ");
+        String line = codes.get(i).trim();
+        String[] tokens = line.split(" ");
+        int v = Integer.parseInt(tokens[1]);
+        for (int k = 0; k < v; k++) {
+            while (!codes.get(i + 1).startsWith("end")) {
+                if (codes.get(i + 1).startsWith("for")) {
+                    i = loop2(codes, i + 1) - 1;
+                } else Program.makeTokens(codes.get(i + 1));
                 i++;
             }
-            finish=i+1;
+            finish = i + 1;
             i=start;
         }
         return finish;
