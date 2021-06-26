@@ -12,21 +12,24 @@ public class Program {
     //Main Method ... ********************************************************************
 
     public static void main(String[] args) throws IOException {
-        path = "TextFiles//src5.txt";
-
+        path = "TextFiles//src6.txt";
         File file = new File(path);
-        if (file.isDirectory()) {
-            throw new IllegalArgumentException("there is a directory...");
-        } else if (file.isFile()) {
-            readFile(file);
+        if (!file.exists()) {
+            throw new IOException("File does not exist!");
+        } else {
+            if (file.isDirectory()) {
+                throw new IllegalArgumentException("there is a directory...");
+            } else if (file.isFile()) {
+                readFile(file);
+            }
         }
     }
 
     //Other methods ... *******************************************************************
     public static void readFile(File f) throws IOException {
         Boolean faz1 = true; //true -> faz1, false -> faz2
+        Scanner sc = new Scanner(f);
         try {
-            Scanner sc = new Scanner(f);
             while (faz1) {
                 String line = sc.nextLine();
                 lineNumber++;
@@ -49,12 +52,13 @@ public class Program {
                 line = line.trim();
                 line = line.replaceAll(" +", " ");
                 String[] tokens = line.split(" ");
-                if (tokens[0].equals("for")) gotoEnd(path, sc);
+                if (tokens[0].equals("for")) gotoEnd(sc);
                 makeTokens(line);
             }
-            sc.close();
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
+        } finally {
+            sc.close();
         }
     }
 
@@ -67,26 +71,37 @@ public class Program {
                 Logic logic = new Logic(tokens);
                 break;
             case 2:
-                initOthersProcess(tokens);
+                choose(tokens);
                 break;
             case 3:
                 GiveValue giveValue = new GiveValue(tokens);
                 break;
+            default:
+//                throw new IllegalArgumentException("lines length is not valid (at line: " + lineNumber + ") " + "--- The program is Stopped.");
+                System.err.println("lines length is not valid (at line: " + lineNumber + ") " + "--- The program is Stopped.");
         }
     }
 
-    public static int initOthersProcess(String[] tokens) throws IOException {
+    public static int choose(String[] tokens) throws IOException {
+        String pattern = "[1-9]+[0]*";
         if (tokens[0].equals("for")) {
-            codes = new ArrayList();
-            int start = Program.lineNumber;
-            int finish = search(start, codes);
-            Program.lineNumber = finish + 1;
-            System.out.println("start: " + start);
-            System.out.println("finish: " + finish);
-            Loop loop = new Loop(tokens, start, finish, codes);
+            if (tokens[1].matches(pattern)) {
+                codes = new ArrayList();
+                int start = Program.lineNumber;
+                int finish = search(start, codes);
+                Program.lineNumber = finish + 1;
+                System.out.println("start: " + start);
+                System.out.println("finish: " + finish);
+                Loop loop = new Loop(tokens, start, finish, codes);
+            } else {
+//               throw new IllegalArgumentException("Loop counter is NOT valid (at line" + lineNumber+ ")");
+                System.err.println("Loop counter is NOT valid (at line: " + lineNumber + ") " + "--- The program is Stopped.");
+            }
         } else if (tokens[0].equals("print")) {
             Print print = new Print(tokens);
             return print.getCharNumber();
+        } else {
+            throw new IllegalArgumentException("Line does not make sense (" + "at line: " + lineNumber + ")");
         }
         return 0;
     }
@@ -99,31 +114,44 @@ public class Program {
         boolean sw = true;
         String[] array = null;
         while (sw) {
-            line = Program.getLine(counter, Program.path);
+            line = Program.getLine(counter);
             line = line.trim();
             line = line.replaceAll(" +", " ");
             array = line.split(" ");
-            if (array[0].equals("for")) forCounter++;
-            else if (array[0].equals("end") && (endCounter < forCounter)) endCounter++;
-            else if (array[0].equals("end") && (endCounter == forCounter)) return (counter - 1);
-
+            if (array[0].equals("for"))
+                forCounter++;
+            else if (array[0].equals("end") && (endCounter < forCounter))
+                endCounter++;
+            else if (array[0].equals("end") && (endCounter == forCounter))
+                return (counter - 1);
             codes.add(line);
             counter++;
+
+            //Todo if "end fore" was missing
+//            if ((forCounter > endCounter) && line == null){
+////                System.err.println("Loop does not have an 'end for'");
+////                throw new IllegalArgumentException("Loop does not have an 'end for'");
+//            }
         }
         return 0;
     }
 
-    public static String getLine(int lineNum, String path) throws IOException {
+    public static String getLine(int lineNum) throws IOException {
         String line;
-        BufferedReader bufferedReader = new BufferedReader(new FileReader(path));
-        for (int i = 0; i < lineNum - 1; i++) {
-            bufferedReader.readLine();
+        try {
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(path));
+            for (int i = 0; i < lineNum - 1; i++) {
+                bufferedReader.readLine();
+            }
+            line = bufferedReader.readLine();
+            return line;
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
         }
-        line = bufferedReader.readLine();
-        return line;
+        return null;
     }
 
-    public static void gotoEnd(String path, Scanner sc) {
+    public static void gotoEnd(Scanner sc) {
         String line = null;
         int forCount = 1;
         int endCount = 0;
@@ -136,7 +164,6 @@ public class Program {
             if (tokens[0].equals("for")) forCount++;
             if (tokens[0].equals("end")) endCount++;
             if (endCount >= forCount) break;
-            //System.out.println("line: "+line);
         }
     }
 }
