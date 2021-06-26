@@ -1,13 +1,8 @@
 int number = 1
 %%
-
-for 2
-print *
-number = number + 1
-end for
-
-for 3
-print hi
+print salam
+for 5
 print number
+number = salam * 1
+print bye
 end for
-print finished...

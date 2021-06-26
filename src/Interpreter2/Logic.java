@@ -4,11 +4,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class Logic extends Statement {
+
     public Logic(String[] tokens) throws IOException {
         execute(tokens);
     }
-    //Methods *****************************************
 
+    //Methods *****************************************
     @Override
     public void execute(String[] tokens) throws IOException {
         float var1 = 0, var2 = 0, var3 = 0;
@@ -50,6 +51,9 @@ public class Logic extends Statement {
             case "/":
                 var1 = var2 / var3;
                 break;
+            default:
+                throw new IllegalArgumentException("Operator is NOT valid (at line: " + Program.lineNumber + ")");
+//                System.err.println("Operator is NOT valid (at line: " + Program.lineNumber+ ")");
         }
 
         if (Variable.intVariables.containsKey(tokens[0])) {
