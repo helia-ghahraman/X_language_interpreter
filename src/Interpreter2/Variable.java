@@ -11,7 +11,7 @@ public class Variable {
 
     public Variable(String type, String name) {
         if (!name.matches(pattern)) {
-            throw new IllegalArgumentException("Variable`s name is wrong!");
+            throw new IllegalArgumentException("Variable`s name is NOT valid!");
         } else {
             if (type.equals("int"))
                 intVariables.put(name, (int) 0);

@@ -55,8 +55,8 @@ public class Program {
                 if (tokens[0].equals("for")) gotoEnd(sc);
                 makeTokens(line);
             }
-        } catch (FileNotFoundException e) {
-            System.out.println(e.getMessage());
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
         } finally {
             sc.close();
         }
@@ -64,7 +64,7 @@ public class Program {
 
     public static void makeTokens(String line) throws IOException {
         line = line.trim();
-        line = line.replaceAll(" +", " ");
+        line = line.replaceAll(" +\t", " ");
         String[] tokens = line.split(" ");
         switch (tokens.length) {
             case 5:
@@ -77,7 +77,6 @@ public class Program {
                 GiveValue giveValue = new GiveValue(tokens);
                 break;
             default:
-//                throw new IllegalArgumentException("lines length is not valid (at line: " + lineNumber + ") " + "--- The program is Stopped.");
                 System.err.println("lines length is not valid (at line: " + lineNumber + ") " + "--- The program is Stopped.");
         }
     }
@@ -90,11 +89,8 @@ public class Program {
                 int start = Program.lineNumber;
                 int finish = search(start, codes);
                 Program.lineNumber = finish + 1;
-                System.out.println("start: " + start);
-                System.out.println("finish: " + finish);
                 Loop loop = new Loop(tokens, start, finish, codes);
             } else {
-//               throw new IllegalArgumentException("Loop counter is NOT valid (at line" + lineNumber+ ")");
                 System.err.println("Loop counter is NOT valid (at line: " + lineNumber + ") " + "--- The program is Stopped.");
             }
         } else if (tokens[0].equals("print")) {
@@ -114,9 +110,13 @@ public class Program {
         boolean sw = true;
         String[] array = null;
         while (sw) {
-            line = Program.getLine(counter);
+            line = getLine(counter);
+            if ( line == null &&forCounter == endCounter ){
+                System.err.println("Loop does not have an 'end for'");
+                throw new IllegalArgumentException("Loop does not have an 'end for'");
+            }
             line = line.trim();
-            line = line.replaceAll(" +", " ");
+            line = line.replaceAll(" +\t", " ");
             array = line.split(" ");
             if (array[0].equals("for"))
                 forCounter++;
@@ -124,14 +124,9 @@ public class Program {
                 endCounter++;
             else if (array[0].equals("end") && (endCounter == forCounter))
                 return (counter - 1);
+
             codes.add(line);
             counter++;
-
-            //Todo if "end fore" was missing
-//            if ((forCounter > endCounter) && line == null){
-////                System.err.println("Loop does not have an 'end for'");
-////                throw new IllegalArgumentException("Loop does not have an 'end for'");
-//            }
         }
         return 0;
     }
@@ -159,7 +154,7 @@ public class Program {
         while (sc.hasNextLine()) {
             line = sc.nextLine();
             line = line.trim();
-            line = line.replaceAll(" +", " ");
+            line = line.replaceAll(" +\t", " ");
             tokens = line.split(" ");
             if (tokens[0].equals("for")) forCount++;
             if (tokens[0].equals("end")) endCount++;

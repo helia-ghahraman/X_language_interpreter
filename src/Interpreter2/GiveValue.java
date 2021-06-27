@@ -58,15 +58,11 @@ public class GiveValue extends Statement {
             else if (Variable.floatVariables.containsKey(tokens[0]))
                 floatVar1 = Variable.floatVariables.get(tokens[0]);
 
-
             if (Variable.intVariables.containsKey(tokens[2]))
                 floatVar2 = Variable.intVariables.get(tokens[2]);
             else if (Variable.floatVariables.containsKey(tokens[2]))
                 floatVar2 = Variable.floatVariables.get(tokens[2]);
-            else
-                floatVar2 = Float.parseFloat(tokens[2]);
-
-            //Todo add try & catch
+            else floatVar2 = Float.parseFloat(tokens[2]);
 
             floatVar1 = floatVar2;
 

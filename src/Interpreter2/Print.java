@@ -1,5 +1,7 @@
 package Interpreter2;
 
+import java.io.IOException;
+
 public class Print extends Statement {
     private int charNumber;
 
@@ -10,6 +12,7 @@ public class Print extends Statement {
     //*********************************************************
     @Override
     public void execute(String[] tokens) {
+        String pattern="[0-9]+";
         if (Variable.intVariables.containsKey(tokens[1])) {
             System.out.println(Variable.intVariables.get(tokens[1]));
             setCharNumber(getDigitI(Variable.intVariables.get(tokens[1])));
@@ -17,10 +20,11 @@ public class Print extends Statement {
         } else if (Variable.floatVariables.containsKey(tokens[1])) {
             System.out.println(Variable.floatVariables.get(tokens[1]));
             setCharNumber(getDigitF(Variable.floatVariables.get(tokens[1])));
-        } else {
+        } else if (tokens[1].matches(pattern)){
             System.out.println(tokens[1]);
             setCharNumber(tokens[1].length());
-        }
+        }else throw new IllegalArgumentException("("+tokens[1]+") can NOT be printed!");
+        getCharNumber();
     }
 
     public int getCharNumber() {
