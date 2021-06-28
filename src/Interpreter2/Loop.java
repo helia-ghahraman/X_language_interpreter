@@ -30,7 +30,6 @@ public class Loop<length> extends Statement {
     public int loop2(ArrayList<String> codes,int i) throws IOException {
         int start = i;
         int finish = 0;
-//        String line=codes.get(i).replaceAll(" +"," ");
         String line = codes.get(i).trim();
         String[] tokens = line.split(" ");
         int v = Integer.parseInt(tokens[1]);

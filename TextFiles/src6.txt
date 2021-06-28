@@ -1,7 +1,12 @@
-int number = 1
+int  number = 1
+float sum
+number = 2 //kjni
+//kjni
 %%
-for 1
-print 2
-end for
-print 2
+for 1//kjni
 print number
+end for//   kjni
+//kjni
+sum = 2 + 1   //kjni
+print hi //kjni
+print sum

@@ -12,7 +12,7 @@ public class Print extends Statement {
     //*********************************************************
     @Override
     public void execute(String[] tokens) {
-        String pattern="[0-9]+";
+        String pattern=".+";
         if (Variable.intVariables.containsKey(tokens[1])) {
             System.out.println(Variable.intVariables.get(tokens[1]));
             setCharNumber(getDigitI(Variable.intVariables.get(tokens[1])));
