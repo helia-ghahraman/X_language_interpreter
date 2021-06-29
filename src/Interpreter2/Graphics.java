@@ -4,7 +4,12 @@ import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
+import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -25,8 +30,15 @@ import javafx.collections.*;
 import java.io.*;
 import javafx.stage.FileChooser;
 import java.awt.*;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.function.IntFunction;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Graphics extends Application {
+    static String path;
+    static int runSw = 0;
     @Override
     public void init() throws Exception {
         System.out.println("before");
@@ -34,37 +46,32 @@ public class Graphics extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        /*stage.setTitle("HAY.Intellij");
-        stage.setWidth(1150);
-        stage.setHeight(800);
+        stage.setTitle("HAY.Intellij");
+        stage.setWidth(1050);
+        stage.setHeight(750);
         stage.setX(200);
-        stage.setY(20);*/
+        stage.setY(20);
         // launch the application
-
-        try {
-            // set title for the stage
-            stage.setTitle("FileChooser");
-
+       try {
             // create a File chooser
             FileChooser fil_chooser = new FileChooser();
-
             // create a Label
-            Label label = new Label("no files selected");
-
+            Label label = new Label("-Choose a text file,then click RUN-");
+            label.setTextFill(Color.web("#595556"));
+            label.setStyle("-fx-font-size: 15px");
             // create a Button
-            Button button = new Button("Show open dialog");
-
+            Button button = new Button("Choose File");
+            button.setTextFill(Color.web("#222224"));
             // create an Event Handler
             EventHandler<ActionEvent> event =
                     new EventHandler<ActionEvent>() {
-
                         public void handle(ActionEvent e) {
                             // get the file selected
                             File file = fil_chooser.showOpenDialog(stage);
-
+                            path=file.getAbsolutePath();
+                            runSw =1;
                             if (file != null) {
-                                label.setText(file.getAbsolutePath()
-                                        + "  selected");
+                                label.setText(path + "  selected");
                             }
                         }
                     };
@@ -72,62 +79,52 @@ public class Graphics extends Application {
             button.setOnAction(event);
             // create a Button
             Button button1 = new Button("Show save dialog");
+           button1.setTextFill(Color.web("#222224"));
             // create an Event Handler
             EventHandler<ActionEvent> event1 =
-                    new EventHandler<ActionEvent>() {
-
+                    new  EventHandler<ActionEvent>() {
                         public void handle(ActionEvent e) {
-
                             // get the file selected
                             File file = fil_chooser.showSaveDialog(stage);
-
+                            path=file.getAbsolutePath();
                             if (file != null) {
-                                label.setText(file.getAbsolutePath()
-                                        + "  selected");
+                                label.setText(path + "  selected");
                             }
                         }
                     };
 
             button1.setOnAction(event1);
 
+           Button button2 = new Button("RUN");
+           button2.setTextFill(Color.web("#222224"));
+           button2.setStyle("-fx-background-color:#d7d7db ");
+           EventHandler<ActionEvent> event2 =
+                   new  EventHandler<ActionEvent>() {
+                       public void handle(ActionEvent e) {
+                           if (runSw==1) {
+                               Program program=new Program();
+                           }else {
+                               label.setText("You have NOT chosen a file yet!");
+                           }
+                       }
+                   };
+           button2.setOnAction(event2);
             // create a VBox
-            VBox vbox = new VBox(30, label, button, button1);
-
-            // set Alignment
+            Pane root=new Pane();
+           root.setStyle("-fx-background-image: url('https://image.freepik.com/free-vector/white-minimal-hexagons-background_79603-1453.jpg'); -fx-background-size: 100% 100%");
+            VBox vbox = new VBox(30);
             vbox.setAlignment(Pos.CENTER);
+            vbox.setLayoutX(430);
+            vbox.setLayoutY(220);
+            vbox.getChildren().addAll(label, button, button1,button2);
 
-            // create a scene
-            Scene scene = new Scene(vbox, 800, 500);
-
-            // set the scene
-            stage.setScene(scene);
-
+            root.getChildren().add(vbox);
+            Scene scene1 = new Scene(root,600,400);
+            stage.setScene(scene1);
+            stage.initStyle(StageStyle.UTILITY);
             stage.show();
         } catch (Exception e) {
-
             System.out.println(e.getMessage());
         }
-
-        //modality
-       /* Stage newWindow=new Stage();
-        newWindow.initModality(Modality.APPLICATION_MODAL);//ta kar bahash tamom nashe az baghie nemishe estefade kard
-        //style
-        newWindow.initStyle(StageStyle.UTILITY);//just have close option
-        newWindow.show();
-
-        VBox parent=new VBox();
-
-        javafx.scene.control.Label label1=new javafx.scene.control.Label("this is a text lable");//child node
-        boolean add = parent.getChildren().add(label1);
-
-        Scene scene=new Scene(parent);
-        scene.setCursor(Cursor.CROSSHAIR);//different shapes of mouse on scene
-        stage.setScene(scene);
-        stage.show();
+        }
     }
-    @Override
-    public void stop(){
-        System.out.println("after");
-    }*/
-    }
-}

@@ -8,19 +8,17 @@ import java.util.Scanner;
 
 public class Program {
     static Integer lineNumber = 0;
-    static String path = null;
     static ArrayList<String> codes = null;
-    static String commentPattern=" [/]{2}.+";
-    static String logicPattern="^\\b([\\w|\\$]+[ ][=][ ]([\\d]|[\\w|\\$]+))( [\\-+*/] ([\\d]|[\\w|\\$]+))*\\b( [/]{2}.+)?$";
-    static String forPattern="^for [1-9]( [/]{2}.+)?$";
-    static String endforPattern="^end for( [/]{2}.+)?$";
-    static String printPattern="^print .+( [/]{2}.+)?$";
+    static String commentPattern=" [/]{2}.*";
+    static String logicPattern="^\\b([\\w|\\$]+[ ][=][ ]([\\d]|[\\w|\\$]+))( [\\-+*/] ([\\d]|[\\w|\\$]+))?\\b( [/]{2}.*)?$";
+    static String forPattern="^for [1-9]( [/]{2}.*)?$";
+    static String endforPattern="^end for( [/]{2}.*)?$";
+    static String printPattern="^print .+( [/]{2}.*)?$";
     //Main Method ... ********************************************************************
 
     public static void main(String[] args) throws IOException {
         Application.launch(Graphics.class,args);
-        path = "TextFiles//src6.txt";
-        File file = new File(path);
+        File file = new File(Graphics.path);
         if (!file.exists()) {
             throw new IOException("File does not exist!");
         } else {
@@ -75,10 +73,10 @@ public class Program {
         line = line.replaceAll("([ ]+|[\\t]+)+", " ");
         String[] tokens = line.split(" ");
         if (line.matches(logicPattern)) {
-            if (tokens.length == 3) {
-                GiveValue giveValue = new GiveValue(tokens);
-            } else if (tokens.length == 5) {
+            if (tokens[3].matches("[+|/|\\-|\\*]")) {
                 Logic logic = new Logic(tokens);
+            } else {
+                GiveValue giveValue = new GiveValue(tokens);
             }
         } else if (line.matches(forPattern)) {
             codes = new ArrayList();
@@ -89,69 +87,32 @@ public class Program {
         } else if (line.matches(printPattern)) {
             Print print = new Print(tokens);
             return print.getCharNumber();
-        } else if (line.isEmpty()||line.matches(commentPattern)) return -1;
-        else System.err.println("this lines is not valid (at line: " + lineNumber + ") " + "--- The program is Stopped.");
+        } else if (line.isEmpty() || line.matches(commentPattern)) return -1;
+        else
+            System.err.println("this lines is not valid (at line: " + lineNumber + ") " + "--- The program is Stopped.");
 
         return 0;
-        /*switch (tokens.length) {
-            case 5:
-                Logic logic = new Logic(tokens);
-                break;
-            case 2:
-                choose(tokens);
-                break;
-            case 3:
-                GiveValue giveValue = new GiveValue(tokens);
-                break;
-            default:
-                System.err.println("this lines is not valid (at line: " + lineNumber + ") " + "--- The program is Stopped.");
-        }*/
     }
-
-  /*  public static int choose(String[] tokens) throws IOException {
-        String pattern = "[1-9]+[0]*";
-        if (tokens[0].equals("for")) {
-            if (tokens[1].matches(pattern)) {
-                codes = new ArrayList();
-                int start = Program.lineNumber;
-                int finish = search(start, codes);
-                Program.lineNumber = finish + 1;
-                Loop loop = new Loop(tokens, start, finish, codes);
-            } else {
-                System.err.println("Loop counter is NOT valid (at line: " + lineNumber + ") " + "--- The program is Stopped.");
-            }
-        } else if (tokens[0].equals("print")) {
-            Print print = new Print(tokens);
-            return print.getCharNumber();
-        } else {
-            throw new IllegalArgumentException("Line does not make sense (" + "at line: " + lineNumber + ")");
-        }
-        return 0;
-    }*/
-
     private static int search(int start, ArrayList codes) throws IOException {
-        String line = null;
+        int lineCount=0;
         int forCounter = 0;
         int endCounter = 0;
         int counter = start + 1;
         boolean sw = true;
-        String[] array = null;
         while (sw) {
-            line = getLine(counter);
+            String line = getLine(counter);
+            lineCount++;
             if ( line == null &&forCounter == endCounter ){
-                System.err.println("Loop does not have an 'end for'");
-                throw new IllegalArgumentException("Loop does not have an 'end for'");
+                throw new IllegalArgumentException("Loop does not have any 'end for' or the syntax is NOT correct!(at line: " + (lineNumber+lineCount) + ")");
             }
             line = line.trim();
             line = line.replaceAll("([ ]+|[\\t]+)+", " ");
-            array = line.split(" ");
-            if (array[0].equals("for"))
+            if (line.matches(forPattern))
                 forCounter++;
-            else if (array[0].equals("end") && (endCounter < forCounter))
+            else if (line.matches(endforPattern) && (endCounter < forCounter))
                 endCounter++;
-            else if (array[0].equals("end") && (endCounter == forCounter))
+            else if (line.matches(endforPattern) && (endCounter == forCounter))
                 return (counter - 1);
-
             codes.add(line);
             counter++;
         }
@@ -161,7 +122,7 @@ public class Program {
     public static String getLine(int lineNum) throws IOException {
         String line;
         try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(path));
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(Graphics.path));
             for (int i = 0; i < lineNum - 1; i++) {
                 bufferedReader.readLine();
             }

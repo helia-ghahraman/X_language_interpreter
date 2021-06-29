@@ -34,8 +34,8 @@ public class Loop<length> extends Statement {
         String[] tokens = line.split(" ");
         int v = Integer.parseInt(tokens[1]);
         for (int k = 0; k < v; k++) {
-            while (!codes.get(i + 1).startsWith("end")) {
-                if (codes.get(i + 1).startsWith("for")) {
+            while (!codes.get(i + 1).matches(Program.endforPattern)) {
+                if (codes.get(i + 1).matches(Program.forPattern)) {
                     i = loop2(codes, i + 1) - 1;
                 } else Program.makeTokens(codes.get(i + 1));
                 i++;

@@ -3,10 +3,18 @@ float sum
 number = 2 //kjni
 //kjni
 %%
-for 1//kjni
+for 2//kjni
+
+for 2
+print hi
+end for
+
 print number
-end for//   kjni
+end for //   kjni
+
 //kjni
-sum = 2 + 1   //kjni
-print hi //kjni
+sum = number * 3//kjni
+
+print bye
+
 print sum
