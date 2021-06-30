@@ -29,12 +29,8 @@ public class Program {
     }
 
     public static void main(String[] args) throws IOException {
-//        Application.launch(Graphics.class,args);
-//        File file = new File(Graphics.path);
-
-        String path = "TextFiles//src6.txt"; // -> faghat baraye src3.txt run mishe
-        File file = new File(path);
-
+        Application.launch(Graphics.class,args);
+        File file = new File(Graphics.path);
         if (!file.exists()) {
             throw new IOException("File does not exist!");
         } else {
@@ -51,7 +47,7 @@ public class Program {
         Scanner sc = new Scanner(f);
         try {
             while (faz1) {
-                String pattern="^\\b(((int )|(float ))[\\w|\\$]+([ ][=][ ]([\\d]|[\\w|\\$]+))?)|^\\b([\\w|\\$]+[ ][=][ ]([\\d]|[\\w|\\$]+))?( [/]{2}.+)?$";
+                String pattern="^\\b(((int )|(float ))[\\w|\\$]+([ ][=][ ](([\\-]?[\\d]+([\\.][\\d]*)?)|[\\w|\\$]+))?)|^\\b([\\w|\\$]+[ ][=][ ](([\\-]?[\\d]+([\\.][\\d]*)?)|[\\w|\\$]+))?( [/]{2}.+)?$";
                 String line = sc.nextLine();
                 lineNumber++;
                 line = line.trim();
@@ -89,10 +85,10 @@ public class Program {
         line = line.replaceAll("([ ]+|[\\t]+)+", " ");
         String[] tokens = line.split(" ");
         if (line.matches(logicPattern)) {
-            if (tokens[3].matches("[+|/|\\-|\\*]")) {
-                Logic logic = new Logic(tokens);
-            } else {
+            if (tokens.length==3) {
                 GiveValue giveValue = new GiveValue(tokens);
+            } else if (tokens[3].matches("[+|\\/|\\-|\\*]")){
+                Logic logic = new Logic(tokens);
             }
         } else if (line.matches(forPattern)) {
             codes = new ArrayList();
@@ -165,5 +161,4 @@ public class Program {
             if (endCount >= forCount) break;
         }
     }
-
 }

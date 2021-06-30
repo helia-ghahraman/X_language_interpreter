@@ -42,14 +42,11 @@ public class Graphics extends Application {
             FileChooser fil_chooser = new FileChooser();
             // create a Label
             Label label = new Label("-Choose a text file, then click RUN-");
-//            label.setTextFill(Color.web("#595556"));
-            label.setStyle("-fx-background-color:#e0372e");
-            label.setStyle("-fx-font-size: 40px");
-
+            label.setTextFill(Color.web("#643969"));
+            label.setStyle("-fx-font-size: 30px");
             // create a Button
             Button chooseButton = new Button("Choose File");
             chooseButton.setTextFill(Color.web("#222224"));
-
             // create an Event Handler
             EventHandler<ActionEvent> event =
                     new EventHandler<ActionEvent>() {
@@ -86,7 +83,7 @@ public class Graphics extends Application {
 
             Button runButton = new Button("RUN");
             runButton.setTextFill(Color.web("#222224"));
-            runButton.setStyle("-fx-background-color:#59ff00");
+            runButton.setStyle("-fx-background-color:#FF7C50");
             EventHandler<ActionEvent> event2 =
                     new EventHandler<ActionEvent>() {
                         public void handle(ActionEvent e) {
@@ -103,12 +100,10 @@ public class Graphics extends Application {
                     };
             runButton.setOnAction(event2);
             // create a VBox
-            GridPane root = new GridPane();
+            Pane root = new GridPane();
+            root.setStyle("-fx-background-image: url('https://cdn5.vectorstock.com/i/1000x1000/82/74/abstract-orange-gray-triangles-background-vector-8878274.jpg'); -fx-background-size: 100% 120%");
 
-            root.setStyle("-fx-background-image: url('https://image.freepik.com/free-vector/white-minimal-hexagons-background_79603-1453.jpg'); -fx-background-size: 100% 100%");
-
-            BackgroundFill background_fill = new BackgroundFill(Color.PINK,
-                    CornerRadii.EMPTY, Insets.EMPTY);
+            BackgroundFill background_fill = new BackgroundFill(Color.PINK, CornerRadii.EMPTY, Insets.EMPTY);
             Background background = new Background(background_fill);
             root.setBackground(background);
 
@@ -118,8 +113,6 @@ public class Graphics extends Application {
             vbox.setLayoutY(220);
             vbox.getChildren().addAll(label, chooseButton, runButton);
             root.getChildren().add(vbox);
-
-//            root.getChildren().addAll(label, chooseButton, runButton);
             Scene scene1 = new Scene(root, 600, 400);
 //            scene1.setFill(new LinearGradient(
 //                    0, 0, 1, 1, true,                      //sizing
@@ -127,7 +120,6 @@ public class Graphics extends Application {
 //                    new Stop(0, Color.web("#81c483")),     //colors
 //                    new Stop(1, Color.web("#fcc200")))
 //            );
-
 
             stage.setScene(scene1);
             stage.initStyle(StageStyle.UTILITY);
