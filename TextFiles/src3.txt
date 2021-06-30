@@ -7,3 +7,4 @@ float sum
 sum = x + y
 sum = sum + w
 print sum
+print ali

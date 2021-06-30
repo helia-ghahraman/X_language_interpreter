@@ -1,5 +1,5 @@
-float   r = 52.051515
-int  n = ssaacca
+float   r = 52.05
+int  n = 7
 %%
 
 print n:

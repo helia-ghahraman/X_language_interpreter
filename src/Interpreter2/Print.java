@@ -1,9 +1,16 @@
 package Interpreter2;
 
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
+
 import java.io.IOException;
 
 public class Print extends Statement {
     private int charNumber;
+    Pane root = new Pane();
+    Scene scene = new Scene(root);
 
     public Print(String[] tokens) {
         execute(tokens);
@@ -12,7 +19,7 @@ public class Print extends Statement {
     //*********************************************************
     @Override
     public void execute(String[] tokens) {
-        String pattern=".+";
+        String pattern = ".+";
         if (Variable.intVariables.containsKey(tokens[1])) {
             System.out.println(Variable.intVariables.get(tokens[1]));
             setCharNumber(getDigitI(Variable.intVariables.get(tokens[1])));
