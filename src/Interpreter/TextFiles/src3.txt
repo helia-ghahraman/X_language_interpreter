@@ -8,3 +8,7 @@ sum = x + y
 sum = sum + w
 print sum
 print ali
+print hiii
+for 3
+print w
+end for

@@ -4,6 +4,7 @@ import Interpreter.write;
 import javafx.application.Application;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -18,13 +19,9 @@ import java.io.*;
 import javafx.stage.FileChooser;
 
 public class Graphics extends Application {
+    static TextArea result = new TextArea();
     static String path;
     static int runSw = 0;
-    @Override
-    public void init() throws Exception {
-        System.out.println("before");
-    }
-
     @Override
     public void start(Stage stage) throws Exception {
         stage.setTitle("HAY.Intellij");
@@ -32,15 +29,11 @@ public class Graphics extends Application {
         stage.setHeight(750);
         stage.setX(200);
         stage.setY(20);
-        // launch the application
        try {
-            // create a File chooser
             FileChooser fil_chooser = new FileChooser();
-            // create a Label
             Label label = new Label("-Choose a text file,then click Compile...or you can write on your own-");
             label.setTextFill(Color.web("#595556"));
             label.setStyle("-fx-font-size: 15px");
-            // create a Button
             Button button = new Button("Choose File");
             button.setTextFill(Color.web("#222224"));
             // create an Event Handler
@@ -83,23 +76,6 @@ public class Graphics extends Application {
            Button button3 = new Button("write my file");
            button3.setTextFill(Color.web("#222224"));
            button3.setStyle("-fx-background-color:#d7d7db ");
-
-//           EventHandler<ActionEvent> event3 =
-//                   new  EventHandler<ActionEvent>() {
-//                       public void handle(ActionEvent e) {
-//                           try {
-//                               write write=new write();
-//                               write.start(stage);
-//
-//                               Program program = new Program();
-//                           } catch (Exception exception) {
-//                               exception.printStackTrace();
-//                           }
-//
-//                       }
-//                   };
-//           button3.setOnAction(event3);
-
            button3.setOnAction(actionEvent -> {
                try {
                    write write = new write();
@@ -107,16 +83,14 @@ public class Graphics extends Application {
                } catch (Exception exception) {
                    exception.printStackTrace();
                }
-
            });
-           // create a VBox
            Pane root = new Pane();
            root.setStyle("-fx-background-image: url('https://image.freepik.com/free-vector/white-minimal-hexagons-background_79603-1453.jpg'); -fx-background-size: 100% 100%");
            VBox vbox = new VBox(30);
            vbox.setAlignment(Pos.CENTER);
            vbox.setLayoutX(430);
            vbox.setLayoutY(220);
-           vbox.getChildren().addAll(label, button, button2, button3);
+           vbox.getChildren().addAll(label, button, button2, button3,result);
             root.getChildren().add(vbox);
             Scene scene1 = new Scene(root,600,400);
             stage.setScene(scene1);

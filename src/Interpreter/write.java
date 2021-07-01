@@ -18,13 +18,12 @@ import java.io.*;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class write extends Application {
+    static TextArea result = new TextArea();
     File file=null;
     @Override
     public void start(Stage stage) throws Exception {
-
         Button compilebtn = new Button("compile");
         compilebtn.setTextFill(Color.web("#69e759"));
-
         Label showLb = new Label("choose a name for your file:  ");
         TextField textname = new TextField();
         Button okbtn = new Button("ok");
@@ -58,10 +57,6 @@ public class write extends Application {
             }
             Graphics.path = String.format("src//Interpreter//TextFiles//" + textname.getText() + ".txt");
             System.out.println(Graphics.path);
-            //before
-            //E:\Desktop\programming\TERM 2\Projects\Final\src\Interpreter\TextFiles\ali.txt
-            ///src//Interpreter//TextFiles//ali.txt
-            stage.close();
             try {
                 Program program = new Program();
             } catch (IOException e) {
@@ -74,12 +69,11 @@ public class write extends Application {
         vbox.setAlignment(Pos.CENTER);
         vbox.setLayoutX(400);
         vbox.setLayoutY(50);
-        vbox.getChildren().addAll(showLb, textname, okbtn, grammer, compilebtn);
+        vbox.getChildren().addAll(showLb, textname, okbtn, grammer, compilebtn,result);
         root.getChildren().add(vbox);
         Scene scene1 = new Scene(root, 600, 400);
         stage.setScene(scene1);
 //        stage.initStyle(StageStyle.UTILITY);
         stage.show();
-
     }
 }

@@ -10,7 +10,7 @@ public class Program {
     static Integer lineNumber = 0;
     static ArrayList<String> codes = null;
     static String commentPattern=" [/]{2}.*";
-    static String logicPattern="^\\b([\\w|\\$]+[ ][=][ ]([\\d]|[\\w|\\$]+))( [\\-+*/] ([\\d]|[\\w|\\$]+))?\\b( [/]{2}.*)?$";
+    static String logicPattern="^\\b([\\w|\\$]+[ ][=][ ](([\\-]?[\\d]+([\\.][\\d]*)?)|[\\w|\\$]+))( [\\-+*/] (([\\-]?[\\d]+([\\.][\\d]*)?)|[\\w|\\$]+))?\\b( [/]{2}.*)?$";
     static String forPattern="^for [1-9]( [/]{2}.*)?$";
     static String endforPattern="^end for( [/]{2}.*)?$";
     static String printPattern="^print .+( [/]{2}.*)?$";

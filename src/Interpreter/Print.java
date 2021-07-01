@@ -7,7 +7,7 @@ public class Print extends Statement {
     private int charNumber;
     Pane root = new Pane();
     Scene scene = new Scene(root);
-
+    static StringBuilder builder=new StringBuilder();
     public Print(String[] tokens) {
         execute(tokens);
     }
@@ -17,17 +17,20 @@ public class Print extends Statement {
     public void execute(String[] tokens) {
         String pattern = ".+";
         if (Variable.intVariables.containsKey(tokens[1])) {
-            System.out.println(Variable.intVariables.get(tokens[1]));
+            builder.append(Variable.intVariables.get(tokens[1])+"\n");
             setCharNumber(getDigitI(Variable.intVariables.get(tokens[1])));
 
         } else if (Variable.floatVariables.containsKey(tokens[1])) {
-            System.out.println(Variable.floatVariables.get(tokens[1]));
+            builder.append(Variable.floatVariables.get(tokens[1])+"\n");
             setCharNumber(getDigitF(Variable.floatVariables.get(tokens[1])));
         } else if (tokens[1].matches(pattern)){
-            System.out.println(tokens[1]);
+            builder.append(tokens[1]+"\n");
             setCharNumber(tokens[1].length());
-        }else throw new IllegalArgumentException("("+tokens[1]+") can NOT be printed!");
+        }else {throw new IllegalArgumentException("("+tokens[1]+") can NOT be printed!");}
         getCharNumber();
+        System.out.println(builder.toString());
+        write.result.setText(builder.toString());
+        Graphics.result.setText(builder.toString());
     }
 
     public int getCharNumber() {
