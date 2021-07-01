@@ -21,14 +21,14 @@ import java.io.*;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class write extends Application {
-
+    File file=null;
     @Override
     public void start(Stage stage) throws Exception {
-       /* Button compilebtn = new Button("compile");
+
+        Button compilebtn = new Button("compile");
         compilebtn.setTextFill(Color.web("#222224"));
-        Label labelname = new Label("choose a name for your file:  ");
+        Label showLb = new Label("choose a name for your file:  ");
         TextField textname = new TextField();
-        AtomicReference<String> name = null;
         Button okbtn = new Button("ok");
         TextArea grammer = new TextArea();
         grammer.setMaxSize(300, 400);
@@ -38,15 +38,23 @@ public class write extends Application {
         EventHandler<ActionEvent> event3 =
                 new EventHandler<ActionEvent>() {
                     public void handle(ActionEvent e) {
-                        try{
-                            name.set(textname.getText());
-                            if (name == null) {
-                                labelname.setText("you have not choosen a name for file!");
-                            } else {
-                                labelname.setText("you have choosen a name successfully!");
-                            }
-                        }catch(Exception exception) {
-                            exception.getMessage();
+                        int sw=0;
+                        String userInput=textname.getText();
+                        if (userInput != null) {
+                             file=new File("src//Interpreter2//TextFiles//"+userInput+"");
+                          /*  String[]names=textFiles.list();
+                            for (int i=0;i<names.length;i++){
+                                if (names[i].equals(userInput+".txt")){
+                                    showLb.setText("Already Exists!");
+                                    showLb.setTextFill(Color.web("#c21b2f"));
+                                    sw=1;
+                                    break;
+                                }
+                            }*/
+                            //if (sw==0) {
+                                showLb.setText(userInput + "  is successfully chosen");
+                                showLb.setTextFill(Color.web("#1bc226"));
+                           // }
                         }
                     }
                 };
@@ -56,24 +64,23 @@ public class write extends Application {
         compilebtn.setOnAction(actionEvent -> {
             code.set(grammer.getText());
             try (PrintWriter out = new PrintWriter(new BufferedWriter(
-                    new FileWriter("TextFiles\\" + name + ".txt", true)))) {
+                    new FileWriter("src//Interpreter2//TextFiles//"+textname.getText()+""+".txt", true)))) {
                 out.println(grammer.getText());
             } catch (IOException ioe) {
                 ioe.printStackTrace();
             }
-            File file = new File("TextFiles\\" + name + ".txt");
+            System.out.println(file.getAbsolutePath());
             Graphics.path = file.getAbsolutePath();
             stage.close();
-
-        });*/
-        Parent root= FXMLLoader.load(getClass().getResource("sample.fxml"));
+        });
+        Pane root=new Pane();
         root.setStyle("-fx-background-image: url('https://image.freepik.com/free-vector/white-minimal-hexagons-background_79603-1453.jpg'); -fx-background-size: 100% 100%");
         VBox vbox = new VBox(30);
         vbox.setAlignment(Pos.CENTER);
         vbox.setLayoutX(400);
         vbox.setLayoutY(100);
-       // vbox.getChildren().addAll(labelname, textname, okbtn, grammer, compilebtn);
-        //root.getChildren().add(vbox);
+        vbox.getChildren().addAll(showLb, textname, okbtn, grammer, compilebtn);
+        root.getChildren().add(vbox);
         Scene scene1 = new Scene(root, 600, 400);
         stage.setScene(scene1);
         stage.initStyle(StageStyle.UTILITY);

@@ -57,7 +57,7 @@ public class Graphics extends Application {
             // create a File chooser
             FileChooser fil_chooser = new FileChooser();
             // create a Label
-            Label label = new Label("-Choose a text file,then click Compile-");
+            Label label = new Label("-Choose a text file,then click Compile...or you can write on your own-");
             label.setTextFill(Color.web("#595556"));
             label.setStyle("-fx-font-size: 15px");
             // create a Button
@@ -72,30 +72,14 @@ public class Graphics extends Application {
                             path=file.getAbsolutePath();
                             runSw =1;
                             if (file != null) {
-                                label.setText(path + "  selected");
+                                if (!path.endsWith(".txt")) {
+                                    label.setText("This is not a text file!Try again!");
+                                     label.setTextFill(Color.web("#595556"));}
+                                else label.setText(path + "  selected");
                             }
                         }
                     };
-
-            button.setOnAction(event);
-            // create a Button
-            Button button1 = new Button("Show save dialog");
-           button1.setTextFill(Color.web("#222224"));
-           //button1.setStyle("-fx-background-color:#d7d7db ");
-            // create an Event Handler
-            EventHandler<ActionEvent> event1 =
-                    new  EventHandler<ActionEvent>() {
-                        public void handle(ActionEvent e) {
-                            // get the file selected
-                            File file = fil_chooser.showSaveDialog(stage);
-                            path=file.getAbsolutePath();
-                            if (file != null) {
-                                label.setText(path + "  selected");
-                            }
-                        }
-                    };
-
-            button1.setOnAction(event1);
+           button.setOnAction(event);
            Button button2 = new Button("Compile");
            button2.setTextFill(Color.web("#222224"));
            button2.setStyle("-fx-background-color:#d7d7db ");
@@ -142,7 +126,7 @@ public class Graphics extends Application {
             vbox.setAlignment(Pos.CENTER);
             vbox.setLayoutX(430);
             vbox.setLayoutY(220);
-            vbox.getChildren().addAll(label, button, button1,button2,button3);
+            vbox.getChildren().addAll(label, button,button2,button3);
             root.getChildren().add(vbox);
             Scene scene1 = new Scene(root,600,400);
             stage.setScene(scene1);

@@ -16,7 +16,7 @@ public class Program {
     static String printPattern="^print .+( [/]{2}.*)?$";
     //Main Method ... ********************************************************************
     public Program() throws IOException {
-        File file = new File(Graphics.path);
+        File file = new File("C:\\Users\\USER\\Desktop\\FinalProject\\src\\Interpreter2\\TextFiles\\yasi");
         if (!file.exists()) {
             throw new IOException("File does not exist!");
         } else {
@@ -29,18 +29,10 @@ public class Program {
     }
 
     public static void main(String[] args) throws IOException {
-        Application.launch(Graphics.class,args);
-        File file = new File(Graphics.path);
-
-        if (!file.exists()) {
-            throw new IOException("File does not exist!");
-        } else {
-            if (file.isDirectory()) {
-                throw new IllegalArgumentException("there is a directory...");
-            } else if (file.isFile()) {
-                readFile(file);
-            }
-        }
+        File file = new File("src/Interpreter2/TextFiles/yasi.txt");
+        readFile(file);
+        //Application.launch(Graphics.class,args);
+        //File file = new File(Graphics.path);
     }
     //Other methods ... *******************************************************************
     public static void readFile(File f) throws IOException {
