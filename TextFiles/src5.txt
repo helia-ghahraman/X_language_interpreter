@@ -1,8 +1,0 @@
-float   r = 52.05
-int  n = 7
-%%
-
-print n:
-print n
- print r:
-print r

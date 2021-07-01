@@ -31,6 +31,7 @@ public class Program {
     public static void main(String[] args) throws IOException {
         Application.launch(Graphics.class,args);
         File file = new File(Graphics.path);
+
         if (!file.exists()) {
             throw new IOException("File does not exist!");
         } else {
