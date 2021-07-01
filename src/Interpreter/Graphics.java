@@ -1,41 +1,21 @@
-package Interpreter2;
+package Interpreter;
+
+import Interpreter.write;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
-import javafx.scene.*;
-import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
-import javafx.scene.text.Font;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
 import javafx.scene.layout.*;
-import javafx.stage.Stage;
 import javafx.geometry.*;
-import javafx.scene.paint.*;
-import javafx.scene.canvas.*;
-import javafx.scene.text.*;
-import javafx.scene.shape.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.collections.*;
+
 import java.io.*;
 import javafx.stage.FileChooser;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.function.IntFunction;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class Graphics extends Application {
     static String path;
@@ -69,8 +49,9 @@ public class Graphics extends Application {
                         public void handle(ActionEvent e) {
                             // get the file selected
                             File file = fil_chooser.showOpenDialog(stage);
-                            path=file.getAbsolutePath();
-                            runSw =1;
+                            path = file.getAbsolutePath();
+                            System.out.println(path);
+                            runSw = 1;
                             if (file != null) {
                                 if (!path.endsWith(".txt")) {
                                     label.setText("This is not a text file!Try again!");
@@ -86,12 +67,13 @@ public class Graphics extends Application {
            EventHandler<ActionEvent> event2 =
                    new  EventHandler<ActionEvent>() {
                        public void handle(ActionEvent e) {
-                           if (runSw==1) {try{
-                               Program program=new Program();
-                           }catch (IOException ioException){
-                               ioException.getMessage();
-                           }
-                           }else {
+                           if (runSw == 1) {
+                               try {
+                                   Program program = new Program();
+                               } catch (IOException ioException) {
+                                   ioException.getMessage();
+                               }
+                           } else {
                                label.setText("You have NOT chosen a file yet!");
                            }
                        }
@@ -102,31 +84,39 @@ public class Graphics extends Application {
            button3.setTextFill(Color.web("#222224"));
            button3.setStyle("-fx-background-color:#d7d7db ");
 
-           EventHandler<ActionEvent> event3 =
-                   new  EventHandler<ActionEvent>() {
-                       public void handle(ActionEvent e) {
-                           try {
-                               write write=new write();
-                               write.start(stage);
-                              /*Parent root= FXMLLoader.load(getClass().getResource("sample.fxml"));
-                               Scene scene=new Scene(root,500,800);
-                               stage.setScene(scene);
-                               stage.show();*/
-                           } catch (Exception exception) {
-                               exception.printStackTrace();
-                           }
+//           EventHandler<ActionEvent> event3 =
+//                   new  EventHandler<ActionEvent>() {
+//                       public void handle(ActionEvent e) {
+//                           try {
+//                               write write=new write();
+//                               write.start(stage);
+//
+//                               Program program = new Program();
+//                           } catch (Exception exception) {
+//                               exception.printStackTrace();
+//                           }
+//
+//                       }
+//                   };
+//           button3.setOnAction(event3);
 
-                       }
-                   };
-           button3.setOnAction(event3);
-            // create a VBox
-            Pane root=new Pane();
+           button3.setOnAction(actionEvent -> {
+               try {
+                   write write = new write();
+                   write.start(stage);
+               } catch (Exception exception) {
+                   exception.printStackTrace();
+               }
+
+           });
+           // create a VBox
+           Pane root = new Pane();
            root.setStyle("-fx-background-image: url('https://image.freepik.com/free-vector/white-minimal-hexagons-background_79603-1453.jpg'); -fx-background-size: 100% 100%");
-            VBox vbox = new VBox(30);
-            vbox.setAlignment(Pos.CENTER);
-            vbox.setLayoutX(430);
-            vbox.setLayoutY(220);
-            vbox.getChildren().addAll(label, button,button2,button3);
+           VBox vbox = new VBox(30);
+           vbox.setAlignment(Pos.CENTER);
+           vbox.setLayoutX(430);
+           vbox.setLayoutY(220);
+           vbox.getChildren().addAll(label, button, button2, button3);
             root.getChildren().add(vbox);
             Scene scene1 = new Scene(root,600,400);
             stage.setScene(scene1);

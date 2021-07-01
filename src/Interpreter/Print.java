@@ -1,11 +1,7 @@
-package Interpreter2;
+package Interpreter;
 
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
-
-import java.io.IOException;
 
 public class Print extends Statement {
     private int charNumber;

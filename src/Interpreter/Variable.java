@@ -1,4 +1,4 @@
-package Interpreter2;
+package Interpreter;
 
 import java.util.HashMap;
 

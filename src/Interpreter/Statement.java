@@ -1,4 +1,4 @@
-package Interpreter2;
+package Interpreter;
 
 public abstract class Statement implements Executable {
 }

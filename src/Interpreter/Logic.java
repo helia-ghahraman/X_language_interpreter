@@ -1,7 +1,6 @@
-package Interpreter2;
+package Interpreter;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class Logic extends Statement {
 
