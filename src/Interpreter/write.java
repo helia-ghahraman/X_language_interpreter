@@ -12,19 +12,20 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import java.io.*;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class write extends Application {
-    static TextArea result = new TextArea();
     File file=null;
     @Override
     public void start(Stage stage) throws Exception {
         Button compilebtn = new Button("compile");
-        compilebtn.setTextFill(Color.web("#69e759"));
+        compilebtn.setTextFill(Color.web("#eb6721"));
         Label showLb = new Label("choose a name for your file:  ");
+        showLb.setFont(new Font("Fonts/BAHNSCHRIFT.TTF",30));
         TextField textname = new TextField();
         Button okbtn = new Button("ok");
         TextArea grammer = new TextArea();
@@ -37,9 +38,9 @@ public class write extends Application {
                     public void handle(ActionEvent e) {
                         int sw=0;
                         String userInput=textname.getText();
-                        if (userInput != null) {
+                        if (userInput.length()>1) {
                             file = new File("src//Interpreter//TextFiles//" + userInput);
-                            showLb.setText(userInput + "  is successfully chosen");
+                            showLb.setText(userInput + "  is successfully made!");
                                 showLb.setTextFill(Color.web("#1bc226"));
                         }
                     }
@@ -59,17 +60,19 @@ public class write extends Application {
             System.out.println(Graphics.path);
             try {
                 Program program = new Program();
-            } catch (IOException e) {
+                Result result=new Result();
+                result.start(stage);
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         });
         Pane root=new Pane();
-        root.setStyle("-fx-background-image: url('https://image.freepik.com/free-vector/white-minimal-hexagons-background_79603-1453.jpg'); -fx-background-size: 100% 100%");
+        root.setStyle("-fx-background-image: url('https://i.pinimg.com/originals/cf/4e/7e/cf4e7ef82f683fcc564d78e786511559.gif'); -fx-background-size: 100% 100%");
         VBox vbox = new VBox(30);
         vbox.setAlignment(Pos.CENTER);
         vbox.setLayoutX(400);
         vbox.setLayoutY(50);
-        vbox.getChildren().addAll(showLb, textname, okbtn, grammer, compilebtn,result);
+        vbox.getChildren().addAll(showLb, textname, okbtn, grammer, compilebtn);
         root.getChildren().add(vbox);
         Scene scene1 = new Scene(root, 600, 400);
         stage.setScene(scene1);

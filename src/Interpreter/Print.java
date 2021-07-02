@@ -3,6 +3,8 @@ package Interpreter;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 
+import java.util.concurrent.TimeUnit;
+
 public class Print extends Statement {
     private int charNumber;
     Pane root = new Pane();
@@ -29,8 +31,7 @@ public class Print extends Statement {
         }else {throw new IllegalArgumentException("("+tokens[1]+") can NOT be printed!");}
         getCharNumber();
         System.out.println(builder.toString());
-        write.result.setText(builder.toString());
-        Graphics.result.setText(builder.toString());
+        Result.result.setText(builder.toString());
     }
 
     public int getCharNumber() {
