@@ -65,9 +65,9 @@ public class Graphics extends Application {
                        public void handle(ActionEvent e) {
                            if (runSw == 1) {
                                try {
-                                   Program program = new Program();
                                    Result result=new Result();
                                    result.start(stage);
+                                   Program program = new Program();
                                } catch (Exception ioException) {
                                    ioException.printStackTrace();
                                }

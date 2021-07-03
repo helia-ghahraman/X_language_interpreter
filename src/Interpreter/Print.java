@@ -2,6 +2,7 @@ package Interpreter;
 
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 import java.util.concurrent.TimeUnit;
 
@@ -28,9 +29,12 @@ public class Print extends Statement {
         } else if (tokens[1].matches(pattern)){
             builder.append(tokens[1]+"\n");
             setCharNumber(tokens[1].length());
-        }else {throw new IllegalArgumentException("("+tokens[1]+") can NOT be printed!");}
+        }else {
+            Result.errors.setText("("+tokens[1]+") can NOT be printed!");
+            throw new IllegalArgumentException("("+tokens[1]+") can NOT be printed!");}
         getCharNumber();
         System.out.println(builder.toString());
+        Result.result.clear();
         Result.result.setText(builder.toString());
     }
 

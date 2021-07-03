@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Program {
+    static Scanner sc=null;
     static Integer lineNumber = 0;
     static ArrayList<String> codes = null;
     static String commentPattern=" [/]{2}.*";
@@ -29,18 +30,15 @@ public class Program {
             }
         }
     }
-
     public static void main(String[] args) throws IOException {
         Application.launch(Graphics.class, args);
-//        File file = new File("src//Interpreter//TextFiles//ali.txt");
-//        readFile(file);
     }
     //Other methods ... *******************************************************************
     public static void readFile(File f) throws IOException {
         Boolean faz1 = true; //true -> faz1, false -> faz2
-        Scanner sc = new Scanner(f);
+        sc = new Scanner(f);
         try {
-            while (faz1) {
+            while (faz1 &&sc.hasNextLine()) {
                 String pattern="^\\b(((int )|(float ))[\\w|\\$]+([ ][=][ ](([\\-]?[\\d]+([\\.][\\d]*)?)|[\\w|\\$]+))?)|^\\b([\\w|\\$]+[ ][=][ ](([\\-]?[\\d]+([\\.][\\d]*)?)|[\\w|\\$]+))?( [/]{2}.+)?$";
                 String line = sc.nextLine();
                 lineNumber++;
@@ -54,9 +52,11 @@ public class Program {
                 } else if(line.matches(pattern)){
                     GiveValue giveValue = new GiveValue(tokens);
                 }else {
-                    throw new IllegalArgumentException("this line is NOT valied!!!(at line: " + lineNumber + ")");
+                    Result.errors.setText("this line is NOT valid!!!(at line: " + line + ")");
+                    throw new IllegalArgumentException("this line is NOT valid!!!(at line: " +line + ")");
                 }
             }
+            if (faz1)System.err.println("There were No '%%'!!!");
             //start faz2
             while (sc.hasNextLine()) {
                 String line = sc.nextLine();
@@ -68,6 +68,7 @@ public class Program {
                 if (makeTokens(line)==-1)continue;
             }
         } catch (IOException e) {
+            Result.errors.setText(e.getMessage());
             System.err.println(e.getMessage());
         } finally {
             sc.close();
@@ -94,9 +95,9 @@ public class Program {
             Print print = new Print(tokens);
             return print.getCharNumber();
         } else if (line.isEmpty() || line.matches(commentPattern)) return -1;
-        else
-            System.err.println("this lines is not valid (at line: " + lineNumber + ") " + "--- The program is Stopped.");
-
+        else {Result.errors.setText("this line is NOT valid!!!(at line: " + line + ")");
+              System.err.println("this line is Not valid (at line: " + line + ") ");
+        }
         return 0;
     }
     private static int search(int start, ArrayList codes) throws IOException {
@@ -108,17 +109,19 @@ public class Program {
         while (sw) {
             String line = getLine(counter);
             lineCount++;
-            if ( line == null &&forCounter == endCounter ){
-                throw new IllegalArgumentException("Loop does not have any 'end for' or the syntax is NOT correct!(at line: " + (lineNumber+lineCount) + ")");
+            if ( line==null &&forCounter == endCounter ){
+                Result.errors.setText("Loop does not have any 'end for' or the syntax is NOT correct!(at line: " + line + ")");
+                throw new IllegalArgumentException("Loop does not have any 'end for' or the syntax is NOT correct!(at line: " + line + ")");
             }
             line = line.trim();
             line = line.replaceAll("([ ]+|[\\t]+)+", " ");
-            if (line.matches(forPattern))
+            if (line.matches(forPattern)) {
                 forCounter++;
-            else if (line.matches(endforPattern) && (endCounter < forCounter))
-                endCounter++;
-            else if (line.matches(endforPattern) && (endCounter == forCounter))
-                return (counter - 1);
+            }
+            else if (line.matches(endforPattern) && (endCounter < forCounter)){
+                endCounter++;}
+            else if (line.matches(endforPattern) && (endCounter == forCounter)){
+                return (counter - 1);}
             codes.add(line);
             counter++;
         }
@@ -135,6 +138,7 @@ public class Program {
             line = bufferedReader.readLine();
             return line;
         } catch (IOException e) {
+            Result.errors.setText(e.getMessage());
             System.err.println(e.getMessage());
         }
         return null;
@@ -142,7 +146,7 @@ public class Program {
 
     public static void gotoEnd(Scanner sc) {
         String line = null;
-        int forCount = 1;
+        int forCount = 0;
         int endCount = 0;
         String[] tokens = null;
         while (sc.hasNextLine()) {

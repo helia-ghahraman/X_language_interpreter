@@ -51,8 +51,7 @@ public class Logic extends Statement {
                 var1 = var2 / var3;
                 break;
             default:
-                throw new IllegalArgumentException("Operator is NOT valid (at line: " + Program.lineNumber + ")");
-//                System.err.println("Operator is NOT valid (at line: " + Program.lineNumber+ ")");
+                throw new IllegalArgumentException("Operator is NOT valid (at line: " + makeString(tokens) + ")");
         }
 
         if (Variable.intVariables.containsKey(tokens[0])) {
@@ -63,5 +62,13 @@ public class Logic extends Statement {
             Variable.floatVariables.remove(tokens[0]);
             Variable.floatVariables.put(tokens[0], var1);
         }
+    }
+    private String makeString(String[] tokens){
+        StringBuilder builder=new StringBuilder();
+        for (int i=0; i<tokens.length;i++){
+            builder.append(tokens[i]);
+            builder.append(" ");
+        }
+        return builder.toString();
     }
 }
