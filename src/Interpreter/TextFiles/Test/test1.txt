@@ -1,0 +1,6 @@
+int y = 1111
+%%
+for 3
+
+print y
+end for

@@ -91,7 +91,7 @@ public class write extends Application {
         vbox.setLayoutY(30);
         vbox.getChildren().addAll(showLb, textname, savebtn,writeFileLb, grammer, compilebtn,back);
         root.getChildren().add(vbox);
-        Scene scene1 = new Scene(root, 600, 400);
+        Scene scene1 = new Scene(root, 500, 300);
         stage.setScene(scene1);
         stage.show();
     }

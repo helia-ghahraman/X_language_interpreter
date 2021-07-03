@@ -32,7 +32,7 @@ public class AboutUs extends Application {
         TextArea inform=new TextArea("\t\t\t\t\t\t\tWelcome to ‘HEY Intellij’\n\n" +
                 "1-This is our final project which is a simple compiler.\n\n" +
                 "2-There are some more option that we added to our project such as:\n" +
-                "a) The ability to add some comments in your code using’//’\n" +
+                "a) The ability to add some comments in your code using ’//’\n" +
                 "b) You can also print strings in addition to variables and numbers!\n" +
                 "c)If your code did not work, don’t worry because you are able to \n" +
                 "see the errors and the reason it occurred!\n" +
@@ -41,10 +41,10 @@ public class AboutUs extends Application {
                 "the option to write your file instantly :D \n" +
                 "f) Finally you are able to go back to the first page and try new codes\n" +
                 " without rerunning the project multiple times!\n" +
-                "e) We added some graphics to the project for you enjoy\uD83D\uDE0A\n\n" +
+                "e) We added some graphics to the project for you enjoy 😎😊\n\n" +
                 "3- Don’t forget to turn your Wi-Fi on while using this Program(other wise\n" +
                 " you won’t be able to enjoy the graphic)\n\n" +
-                "4-This project is written by: Helia Ghahraman , Yasamin Azizi and Ali Hamid zade\n");
+                "4-This project is written by: Helia Ghahraman, Yasamin Azizi and Ali Hamidzade\n");
         inform.setDisable(true);
         inform.setMinSize(500, 500);
         Pane root=new Pane();

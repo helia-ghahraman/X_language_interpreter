@@ -1,0 +1,27 @@
+int x = 0
+int a = 100
+int y = 1111
+int z = 9999
+
+%%
+
+for 3
+print y
+
+  for 2
+    x = x + 1
+    print x
+  end for
+
+  x = x - 2
+
+  for 5
+    a = a + 5
+    print a
+  end for
+
+  a = a - 25
+
+  print z
+
+end for

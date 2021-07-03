@@ -61,7 +61,7 @@ public class Result extends Application {
         vbox.setLayoutY(80);
         vbox.getChildren().addAll(resultLb,result,errorLb,errors,back);
         root.getChildren().add(vbox);
-        Scene scene1 = new Scene(root, 600, 400);
+        Scene scene1 = new Scene(root, 500, 300);
         stage.setScene(scene1);
         stage.show();
 

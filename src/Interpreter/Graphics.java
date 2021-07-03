@@ -110,7 +110,7 @@ public class Graphics extends Application {
            vbox.setLayoutY(220);
            vbox.getChildren().addAll(chooseLB, chooseBtn, compileB, writeBtn,aboutUs);
             root.getChildren().add(vbox);
-            Scene scene1 = new Scene(root,600,400);
+            Scene scene1 = new Scene(root, 500, 300);
 
             stage.setScene(scene1);
             stage.show();

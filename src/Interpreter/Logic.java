@@ -63,6 +63,7 @@ public class Logic extends Statement {
             Variable.floatVariables.put(tokens[0], var1);
         }
     }
+
     private String makeString(String[] tokens){
         StringBuilder builder=new StringBuilder();
         for (int i=0; i<tokens.length;i++){
