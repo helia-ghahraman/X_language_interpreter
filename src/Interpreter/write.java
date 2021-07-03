@@ -52,7 +52,6 @@ public class write extends Application {
         EventHandler<ActionEvent> event4 =
                 new EventHandler<ActionEvent>() {
                     public void handle(ActionEvent e) {
-                        Program.lineNumber=0;
                         Print.builder.setLength(0);
                         Result.result.clear();
                         Result.errors.clear();
@@ -78,8 +77,7 @@ public class write extends Application {
             try {
                 Result result=new Result();
                 result.start(stage);
-                Program.lineNumber=0;
-                Program program1 = new Program();
+                Program program = new Program();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -87,7 +85,7 @@ public class write extends Application {
         //**************************************
         Pane root=new Pane();
         root.setStyle("-fx-background-image: url('https://i.pinimg.com/originals/cf/4e/7e/cf4e7ef82f683fcc564d78e786511559.gif'); -fx-background-size: 100% 100%");
-        VBox vbox = new VBox(20);
+        VBox vbox = new VBox(15);
         vbox.setAlignment(Pos.CENTER);
         vbox.setLayoutX(400);
         vbox.setLayoutY(30);

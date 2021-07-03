@@ -35,13 +35,14 @@ public class Graphics extends Application {
        try {
             FileChooser fil_chooser = new FileChooser();
             Label chooseLB = new Label("-Choose a text file,then click Compile...or you can write on your own-");
-            chooseLB.setStyle("-fx-font-style: 'Brush Script MT'");
             chooseLB.setTextFill(Color.web("#595556"));
             chooseLB.setStyle("-fx-font-size:20px");
             Button chooseBtn = new Button("Choose File");
-           chooseBtn.setTextFill(Color.web("#222224"));
-            EventHandler<ActionEvent> event =
-                    new EventHandler<ActionEvent>() {
+            chooseBtn.setTextFill(Color.web("#222224"));
+            Button aboutUs=new Button("About us");
+            aboutUs.setTextFill(Color.web("#e3c91e"));
+            aboutUs.setStyle("-fx-background-color: #1d5dde");
+            EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {
                         public void handle(ActionEvent e) {
                             File file = fil_chooser.showOpenDialog(stage);
                             path = file.getAbsolutePath();
@@ -58,10 +59,10 @@ public class Graphics extends Application {
                         }
                     };
            chooseBtn.setOnAction(event);
+           //***************************************************
            Button compileB = new Button("Compile");
            compileB.setTextFill(Color.web("#eb6721"));
-           EventHandler<ActionEvent> event2 =
-                   new  EventHandler<ActionEvent>() {
+           EventHandler<ActionEvent> event2 =new  EventHandler<ActionEvent>() {
                        public void handle(ActionEvent e) {
                            if (runSw == 1) {
                                try {
@@ -78,7 +79,7 @@ public class Graphics extends Application {
                        }
                    };
            compileB.setOnAction(event2);
-           //////////////
+           //****************************************
            Button writeBtn = new Button("write my file");
            writeBtn.setTextFill(Color.web("#222224"));
            writeBtn.setOnAction(actionEvent -> {
@@ -89,13 +90,25 @@ public class Graphics extends Application {
                    exception.printStackTrace();
                }
            });
+           //********************************************
+           EventHandler<ActionEvent> event3 = new EventHandler<ActionEvent>() {
+                       public void handle(ActionEvent e) {
+                            AboutUs aboutUs1=new AboutUs();
+                           try {
+                               aboutUs1.start(stage);
+                           } catch (Exception exception) {
+                               exception.printStackTrace();
+                           }
+                       }
+                   };
+           aboutUs.setOnAction(event3);
            Pane root = new Pane();
            root.setStyle("-fx-background-image: url('https://i.pinimg.com/originals/cf/4e/7e/cf4e7ef82f683fcc564d78e786511559.gif'); -fx-background-size: 100% 100%");
            VBox vbox = new VBox(30);
            vbox.setAlignment(Pos.CENTER);
-           vbox.setLayoutX(380);
+           vbox.setLayoutX(340);
            vbox.setLayoutY(220);
-           vbox.getChildren().addAll(chooseLB, chooseBtn, compileB, writeBtn);
+           vbox.getChildren().addAll(chooseLB, chooseBtn, compileB, writeBtn,aboutUs);
             root.getChildren().add(vbox);
             Scene scene1 = new Scene(root,600,400);
 

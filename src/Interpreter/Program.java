@@ -7,7 +7,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Program {
-    static Scanner sc=null;
+    static String line;
+    static Scanner sc ;
     static Integer lineNumber = 0;
     static ArrayList<String> codes = null;
     static String commentPattern=" [/]{2}.*";
@@ -17,6 +18,9 @@ public class Program {
     static String printPattern="^print .+( [/]{2}.*)?$";
     //Main Method ... ********************************************************************
     public Program() throws IOException {
+        sc = null;
+        line=null;
+        lineNumber=0;
         if (Graphics.path != null) {
             File file = new File(Graphics.path);
             if (!file.exists()) {
@@ -40,7 +44,7 @@ public class Program {
         try {
             while (faz1 &&sc.hasNextLine()) {
                 String pattern="^\\b(((int )|(float ))[\\w|\\$]+([ ][=][ ](([\\-]?[\\d]+([\\.][\\d]*)?)|[\\w|\\$]+))?)|^\\b([\\w|\\$]+[ ][=][ ](([\\-]?[\\d]+([\\.][\\d]*)?)|[\\w|\\$]+))?( [/]{2}.+)?$";
-                String line = sc.nextLine();
+                line = sc.nextLine();
                 lineNumber++;
                 line = line.trim();
                 line = line.replaceAll("//", " //");
@@ -95,20 +99,23 @@ public class Program {
             Print print = new Print(tokens);
             return print.getCharNumber();
         } else if (line.isEmpty() || line.matches(commentPattern)) return -1;
-        else {Result.errors.setText("this line is NOT valid!!!(at line: " + line + ")");
-              System.err.println("this line is Not valid (at line: " + line + ") ");
+        else if (!line.matches(endforPattern)){
+            Result.errors.setText("this line is NOT valid!!!(at line: " + line + ")");
+            System.err.println("this line is Not valid (at line: " + line + ") ");
         }
         return 0;
     }
     private static int search(int start, ArrayList codes) throws IOException {
-        int lineCount=0;
         int forCounter = 0;
         int endCounter = 0;
         int counter = start + 1;
         boolean sw = true;
         while (sw) {
             String line = getLine(counter);
-            lineCount++;
+            if ( line==null &&forCounter == endCounter ){
+                Result.errors.setText("Loop does not have any 'end for' or the syntax is NOT correct!(at line: " + line + ")");
+                throw new IllegalArgumentException("Loop does not have any 'end for' or the syntax is NOT correct!(at line: " + line + ")");
+            }
             line = line.trim();
             line = line.replaceAll("([ ]+|[\\t]+)+", " ");
             if (line.matches(forPattern)) {
@@ -120,10 +127,6 @@ public class Program {
                 return (counter - 1);}
             codes.add(line);
             counter++;
-            if ( line==null &&forCounter == endCounter ){
-                Result.errors.setText("Loop does not have any 'end for' or the syntax is NOT correct!(at line: " + line + ")");
-                throw new IllegalArgumentException("Loop does not have any 'end for' or the syntax is NOT correct!(at line: " + line + ")");
-            }
         }
         return 0;
     }
