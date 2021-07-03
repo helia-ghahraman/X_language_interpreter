@@ -1,3 +1,13 @@
-int a 3
-float b = 4.4
+int a
+%%
+for 2
 
+print hi
+for 2
+print a
+end for
+for 2
+print **
+end for
+
+end for

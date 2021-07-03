@@ -68,8 +68,8 @@ public class Program {
                 line = line.trim();
                 line = line.replaceAll("([ ]+|[\\t]+)+", " ");
                 String[] tokens = line.split(" ");
-                if (tokens[0].equals("for")) gotoEnd(sc);
-                if (makeTokens(line)==-1)continue;
+                if (line.matches(forPattern)) gotoEnd(sc);
+                if (makeTokens(line)==-1) continue;
             }
         } catch (IOException e) {
             Result.errors.setText(e.getMessage());
@@ -94,6 +94,7 @@ public class Program {
             int start = Program.lineNumber;
             int finish = search(start, codes);
             Program.lineNumber = finish + 1;
+            System.out.println(finish+"***");
             Loop loop = new Loop(tokens, start, finish, codes);
         } else if (line.matches(printPattern)) {
             Print print = new Print(tokens);
@@ -112,9 +113,9 @@ public class Program {
         boolean sw = true;
         while (sw) {
             String line = getLine(counter);
-            if ( line==null &&forCounter == endCounter ){
-                Result.errors.setText("Loop does not have any 'end for' or the syntax is NOT correct!(at line: " + line + ")");
-                throw new IllegalArgumentException("Loop does not have any 'end for' or the syntax is NOT correct!(at line: " + line + ")");
+            if (!sc.hasNext() &&forCounter == endCounter ){
+                Result.errors.setText("Loop does not have any 'end for' or the syntax is NOT correct!");
+                throw new IllegalArgumentException("Loop does not have any 'end for' or the syntax is NOT correct!");
             }
             line = line.trim();
             line = line.replaceAll("([ ]+|[\\t]+)+", " ");
@@ -124,7 +125,7 @@ public class Program {
             else if (line.matches(endforPattern) && (endCounter < forCounter)){
                 endCounter++;}
             else if (line.matches(endforPattern) && (endCounter == forCounter)){
-                return (counter - 1);}
+                return counter;}
             codes.add(line);
             counter++;
         }
@@ -148,7 +149,6 @@ public class Program {
     }
 
     public static void gotoEnd(Scanner sc) {
-        String line = null;
         int forCount = 0;
         int endCount = 0;
         String[] tokens = null;

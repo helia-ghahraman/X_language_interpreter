@@ -80,7 +80,7 @@ public class Graphics extends Application {
                    };
            compileB.setOnAction(event2);
            //****************************************
-           Button writeBtn = new Button("write my file");
+           Button writeBtn = new Button("Write File");
            writeBtn.setTextFill(Color.web("#222224"));
            writeBtn.setOnAction(actionEvent -> {
                try {
