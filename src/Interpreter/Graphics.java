@@ -113,7 +113,8 @@ public class Graphics extends Application {
             Scene scene1 = new Scene(root, 500, 300);
 
             stage.setScene(scene1);
-            stage.show();
+           stage.alwaysOnTopProperty();
+           stage.show();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

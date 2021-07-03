@@ -40,18 +40,18 @@ public class Program {
     }
 
     public static void main(String[] args) throws IOException {
-//        Application.launch(Graphics.class, args);
-        String path = "src/Interpreter/TextFiles/Test/test1.txt";
-        File file = new File(path);
-        if (!file.exists()) {
-            throw new IOException("File does not exist!");
-        } else {
-            if (file.isDirectory()) {
-                throw new IllegalArgumentException("there is a directory...");
-            } else if (file.isFile()) {
-                readFile(file);
-            }
-        }
+        Application.launch(Graphics.class, args);
+//        String path = "src/Interpreter/TextFiles/Test/test1.txt";
+//        File file = new File(path);
+//        if (!file.exists()) {
+//            throw new IOException("File does not exist!");
+//        } else {
+//            if (file.isDirectory()) {
+//                throw new IllegalArgumentException("there is a directory...");
+//            } else if (file.isFile()) {
+//                readFile(file);
+//            }
+//        }
     }
 
     //Other methods ... *******************************************************************
@@ -77,8 +77,10 @@ public class Program {
                     throw new IllegalArgumentException("this line is NOT valid!!!(at line: " + line + ")");
                 }
             }
-            if (faz1) System.err.println("There were No '%%'!!!");
-
+            if (faz1) {
+                Result.errors.setText("There were No '%%'!!!");
+                System.err.println("There were No '%%'!!!");
+            }
             //start faz2
             while (sc.hasNextLine()) {
                 String line = sc.nextLine();
@@ -133,7 +135,7 @@ public class Program {
         boolean sw = true;
         while (sw) {
             String line = getLine(counter);
-            if (!sc.hasNext() && forCounter == endCounter) {
+            if (sc == null && forCounter == endCounter) {
                 Result.errors.setText("Loop does not have any 'end for' or the syntax is NOT correct!");
                 throw new IllegalArgumentException("Loop does not have any 'end for' or the syntax is NOT correct!");
             }
@@ -155,9 +157,8 @@ public class Program {
     public static String getLine(int lineNum) throws IOException {
         String line;
         try {
-//            BufferedReader bufferedReader = new BufferedReader(new FileReader(Graphics.path));
-            BufferedReader bufferedReader = new BufferedReader(
-                    new FileReader("src/Interpreter/TextFiles/Test/test1.txt"));
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(Graphics.path));
+//            BufferedReader bufferedReader = new BufferedReader(new FileReader("src/Interpreter/TextFiles/Test/test1.txt"));
             for (int i = 0; i < lineNum - 1; i++) {
                 bufferedReader.readLine();
             }
@@ -171,7 +172,7 @@ public class Program {
     }
 
     public static void gotoEnd(Scanner sc) {
-        int forCount = 0;
+        int forCount = 1;
         int endCount = 0;
         String[] tokens = null;
         while (sc.hasNextLine()) {

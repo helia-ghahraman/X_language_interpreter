@@ -23,10 +23,7 @@ public class Loop<length> extends Statement {
                 if (codes.get(i).matches(Program.forPattern)) {
                     i = loop2(codes, i);
                 } else {
-                    if (Program.makeTokens(codes.get(i)) == -1) {
-                        System.out.println("daki :)");
-                        continue;
-                    }
+                    Program.makeTokens(codes.get(i));
                 }
             }
         }
