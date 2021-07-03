@@ -1,0 +1,14 @@
+int a = 2
+float sum
+float b = -4.5
+%%
+sum = a + b
+print sum
+print ***
+for 2
+print ***
+for 3
+print b
+end for
+
+end for

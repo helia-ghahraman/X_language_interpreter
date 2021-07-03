@@ -1,0 +1,5 @@
+int a = -4
+float c = 0.3
+%%
+print a
+print c
