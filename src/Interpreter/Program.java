@@ -109,10 +109,6 @@ public class Program {
         while (sw) {
             String line = getLine(counter);
             lineCount++;
-            if ( line==null &&forCounter == endCounter ){
-                Result.errors.setText("Loop does not have any 'end for' or the syntax is NOT correct!(at line: " + line + ")");
-                throw new IllegalArgumentException("Loop does not have any 'end for' or the syntax is NOT correct!(at line: " + line + ")");
-            }
             line = line.trim();
             line = line.replaceAll("([ ]+|[\\t]+)+", " ");
             if (line.matches(forPattern)) {
@@ -124,6 +120,10 @@ public class Program {
                 return (counter - 1);}
             codes.add(line);
             counter++;
+            if ( line==null &&forCounter == endCounter ){
+                Result.errors.setText("Loop does not have any 'end for' or the syntax is NOT correct!(at line: " + line + ")");
+                throw new IllegalArgumentException("Loop does not have any 'end for' or the syntax is NOT correct!(at line: " + line + ")");
+            }
         }
         return 0;
     }
