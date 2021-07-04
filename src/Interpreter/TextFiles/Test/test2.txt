@@ -3,6 +3,7 @@ int y = 1111
 int z = 9999
 %%
 for 3
+
 print y
 for 2
 x = x + 1

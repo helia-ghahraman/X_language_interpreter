@@ -1,13 +1,14 @@
-int a
+int x = 0
+int y = 1111.9
+int z = 9999
 %%
-for 2
+for 3
 
-print hi
+print y
 for 2
-print a
+x = x + 1
+print x
 end for
-for 2
-print **
+print z
 end for
 
-end for

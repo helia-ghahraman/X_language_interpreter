@@ -6,6 +6,7 @@ int z = 9999
 %%
 
 for 3
+
 print y
 
   for 2

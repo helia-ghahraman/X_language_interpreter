@@ -111,7 +111,6 @@ public class Graphics extends Application {
            vbox.getChildren().addAll(chooseLB, chooseBtn, compileB, writeBtn,aboutUs);
             root.getChildren().add(vbox);
             Scene scene1 = new Scene(root, 500, 300);
-
             stage.setScene(scene1);
            stage.alwaysOnTopProperty();
            stage.show();

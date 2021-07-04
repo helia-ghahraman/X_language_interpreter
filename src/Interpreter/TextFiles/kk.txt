@@ -1,14 +1,28 @@
-float a = 2
-float b = 3.5
-float sum = b 
+int x = 0
+int a = 100
+int y = 1111
+int z = 9999
+
 %%
-for 2
-print hi
+
 for 3
-print ***
-for 2 
-print sum
-sum = sum + 1
+print y
+
+  for 2
+    x = x + 1
+    print x
+  end for
+
+  x = x - 2
+
+  for 5
+    a = a + 5
+    print a
+  end for
+
+  a = a - 25
+
+  print z
+
 end for
-end for 
-end for
+

@@ -158,7 +158,6 @@ public class Program {
         String line;
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(Graphics.path));
-//            BufferedReader bufferedReader = new BufferedReader(new FileReader("src/Interpreter/TextFiles/Test/test1.txt"));
             for (int i = 0; i < lineNum - 1; i++) {
                 bufferedReader.readLine();
             }
