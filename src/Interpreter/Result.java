@@ -43,6 +43,7 @@ public class Result extends Application {
                         Program.lineNumber=0;
                         Print.builder.setLength(0);
                         result.clear();
+                        errors.clear();
                         Graphics graphics=new Graphics();
                         try {
                             graphics.start(stage);

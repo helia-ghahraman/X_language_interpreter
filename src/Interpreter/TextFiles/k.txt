@@ -1,14 +1,5 @@
-int x = 0
-int y = 1111.9
-int z = 9999
 %%
-for 3
-
-print y
 for 2
-x = x + 1
-print x
-end for
-print z
-end for
+
+print hhi
 

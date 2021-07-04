@@ -1,2 +1,7 @@
 %%
+
+for 3
+
 print hiii
+
+end for

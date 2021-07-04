@@ -30,7 +30,7 @@ public class Graphics extends Application {
         stage.setResizable(false);
         stage.setWidth(1100);
         stage.setHeight(700);
-        stage.setX(200);
+        stage.setX(100);
         stage.setY(20);
        try {
             FileChooser fil_chooser = new FileChooser();

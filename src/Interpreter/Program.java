@@ -124,18 +124,22 @@ public class Program {
         boolean sw = true;
         while (sw) {
             String line = getLine(counter);
-            if (sc == null && forCounter == endCounter) {
-                Result.errors.setText("Loop does not have any 'end for' or the syntax is NOT correct!");
-                throw new IllegalArgumentException("Loop does not have any 'end for' or the syntax is NOT correct!");
-            }
-            line = line.trim();
-            line = line.replaceAll("([ ]+|[\\t]+)+", " ");
-            if (line.matches(forPattern)) {
-                forCounter++;
-            } else if (line.matches(endforPattern) && (endCounter < forCounter)) {
-                endCounter++;
-            } else if (line.matches(endforPattern) && (endCounter == forCounter)) {
-                return counter;
+            if (line!=null) {
+                line = line.trim();
+                line = line.replaceAll("([ ]+|[\\t]+)+", " ");
+                if (line.matches(forPattern)) {
+                    forCounter++;
+                } else if (line.startsWith("end") && (endCounter < forCounter)) {
+                    System.out.println(endCounter+"  "+forCounter);
+                    endCounter++;
+                } else if (line.startsWith("end") && (endCounter == forCounter)) {
+                    return counter;
+                }
+            }else {
+                if(forCounter == endCounter) {
+                    Result.errors.setText("Loop does not have any 'end for' or the syntax is NOT correct!");
+                    throw new IllegalArgumentException("Loop does not have any 'end for' or the syntax is NOT correct!");
+                }
             }
             codes.add(line);
             counter++;
