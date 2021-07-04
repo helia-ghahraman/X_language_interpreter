@@ -28,8 +28,8 @@ public class Graphics extends Application {
     public void start(Stage stage) throws Exception {
         stage.setTitle("HAY.Intellij");
         stage.setResizable(false);
-        stage.setWidth(1200);
-        stage.setHeight(800);
+        stage.setWidth(1100);
+        stage.setHeight(700);
         stage.setX(200);
         stage.setY(20);
        try {
@@ -106,8 +106,8 @@ public class Graphics extends Application {
            root.setStyle("-fx-background-image: url('https://i.pinimg.com/originals/cf/4e/7e/cf4e7ef82f683fcc564d78e786511559.gif'); -fx-background-size: 100% 100%");
            VBox vbox = new VBox(30);
            vbox.setAlignment(Pos.CENTER);
-           vbox.setLayoutX(340);
-           vbox.setLayoutY(220);
+           vbox.setLayoutX(280);
+           vbox.setLayoutY(180);
            vbox.getChildren().addAll(chooseLB, chooseBtn, compileB, writeBtn,aboutUs);
             root.getChildren().add(vbox);
             Scene scene1 = new Scene(root, 500, 300);

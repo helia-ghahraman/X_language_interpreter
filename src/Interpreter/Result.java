@@ -57,8 +57,8 @@ public class Result extends Application {
         root.setStyle("-fx-background-image: url('https://i.pinimg.com/originals/cf/4e/7e/cf4e7ef82f683fcc564d78e786511559.gif'); -fx-background-size: 100% 100%");
         VBox vbox = new VBox(30);
         vbox.setAlignment(Pos.CENTER);
-        vbox.setLayoutX(400);
-        vbox.setLayoutY(80);
+        vbox.setLayoutX(320);
+        vbox.setLayoutY(30);
         vbox.getChildren().addAll(resultLb,result,errorLb,errors,back);
         root.getChildren().add(vbox);
         Scene scene1 = new Scene(root, 500, 300);

@@ -41,17 +41,6 @@ public class Program {
 
     public static void main(String[] args) throws IOException {
         Application.launch(Graphics.class, args);
-//        String path = "src/Interpreter/TextFiles/Test/test1.txt";
-//        File file = new File(path);
-//        if (!file.exists()) {
-//            throw new IOException("File does not exist!");
-//        } else {
-//            if (file.isDirectory()) {
-//                throw new IllegalArgumentException("there is a directory...");
-//            } else if (file.isFile()) {
-//                readFile(file);
-//            }
-//        }
     }
 
     //Other methods ... *******************************************************************

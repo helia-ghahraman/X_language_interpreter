@@ -44,14 +44,14 @@ public class AboutUs extends Application {
                 "e) We added some graphics to the project for you to enjoy 😎😊\n\n" +
                 "3- Don’t forget to turn your Wi-Fi on while using this Program(other wise\n" +
                 " you won’t be able to enjoy the graphic)\n\n" +
-                "4-This project is written by: Helia Ghahraman, Yasamin Azizi and Ali Hamidzade\n");
+                "4-This project is written by:\n Helia Ghahraman(9822762437)\n Yasamin Azizi(9922762037)\n Ali Hamidzade(9912762529)\n");
         inform.setDisable(true);
         inform.setMinSize(500, 500);
         Pane root=new Pane();
         root.setStyle("-fx-background-image: url('https://i.pinimg.com/originals/cf/4e/7e/cf4e7ef82f683fcc564d78e786511559.gif'); -fx-background-size: 100% 100%");
         VBox vbox = new VBox(20);
         vbox.setAlignment(Pos.CENTER);
-        vbox.setLayoutX(400);
+        vbox.setLayoutX(320);
         vbox.setLayoutY(50);
         vbox.getChildren().addAll(inform,back);
         root.getChildren().add(vbox);
