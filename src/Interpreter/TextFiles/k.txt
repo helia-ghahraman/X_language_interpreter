@@ -1,5 +1,0 @@
-%%
-for 2
-
-print hhi
-
