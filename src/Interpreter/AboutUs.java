@@ -44,7 +44,7 @@ public class AboutUs extends Application {
                 "e) We added some graphics to the project for you to enjoy 😎😊\n\n" +
                 "3- Don’t forget to turn your Wi-Fi on while using this Program(other wise\n" +
                 " you won’t be able to enjoy the graphic)\n\n" +
-                "4-This project is written by:\n Helia Ghahraman(9822762437)\n Yasamin Azizi(9922762037)\n Ali Hamidzade(9912762529)\n");
+                "4-This project is written by:\n Helia Ghahraman\n Ali Hamidzade\n");
         inform.setDisable(true);
         inform.setMinSize(500, 500);
         Pane root=new Pane();
