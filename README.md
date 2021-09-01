@@ -66,3 +66,21 @@ for 3
 print w
 
 end for
+# Preview
+How the program looks like:
+
+![compiler](https://user-images.githubusercontent.com/76126890/131711251-8825abc6-ce3c-4775-b20a-24de851b10d7.png)
+
+You can choose a file from your system and compile it!
+
+![choose](https://user-images.githubusercontent.com/76126890/131711300-32d0d61c-24c9-4d2d-8710-0c1288042a9b.png)
+
+OR you can write the code right away and compile(the file will be saved!):
+
+![write](https://user-images.githubusercontent.com/76126890/131711655-13162014-fa6f-4588-a6aa-2e20792c0cc5.png)
+
+Then the result will be shown:
+
+![result](https://user-images.githubusercontent.com/76126890/131711919-2d6d781d-7aa9-4ebd-9aaa-ddc705f3e69f.png)
+# About us
+![about](https://user-images.githubusercontent.com/76126890/131711985-71b4d3e6-7949-4839-9441-ce928f9d031d.png)
