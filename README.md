@@ -3,7 +3,7 @@ Final Project for the second semester. This is a simple compiler that executes c
 The compiler must receive a text file containing the program written in the X language and execute it by interpreting it.The program in the X language consists of 2 parts, which are separated by a line containing %%.
 
 1) The first part is for defining program variables. This section can contain no definition of any variables.Each variable is defined in one line. The definition of each variable includes the identifier of the variable type and
-A variable name that is separated by one or more spaces. The variables of the variable type are int and
+A variable name that is separated by one or more spaces. The variables type are int and
 float. The variable name is also a valid identifier (based on the rules of the Java language). The initial value of a variable, as
 The automaton is zero unless, in its definition, its initial value is declared, in which case the assignment operator with
 The initial value of the variable is used.
@@ -17,7 +17,7 @@ b) Subtraction command: It has two operands. Each of its two operands can be a n
 
 c) Multiplication command: It has two operands. Each of its two operands can be a numeric constant or a variable.
 
-d) Split command: has two operands. Each of its two operands can be a numeric constant or a variable. Command
+d) Division command: has two operands. Each of its two operands can be a numeric constant or a variable. Command
 Divides the value of the left operand by the value of its right operand and the result as the output value.
 Returns.
 
@@ -28,7 +28,7 @@ f)Assignment command: Has two operands. The right operand is a literal integer, 
 the output value of the assignment command is equal to the value of the operand on its right.
 
 g) For command : This command is used to simulate the control structure of the loop, in a very limited way. Its general shape
-It is as follows:
+is as follows:
 
 for(Number of loop repetitions)
 
