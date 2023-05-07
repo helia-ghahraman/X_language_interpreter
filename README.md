@@ -1,4 +1,4 @@
-# Simple-Compiler
+# X_language_interpreter
 Final Project for the second semester. This is a simple compiler that executes common commands from the Hypothetical language X that will be explained below.
 The compiler must receive a text file containing the program written in the X language and execute it by interpreting it.The program in the X language consists of 2 parts, which are separated by a line containing %%.
 
